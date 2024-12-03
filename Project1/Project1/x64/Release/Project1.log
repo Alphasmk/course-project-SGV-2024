@@ -1,0 +1,14 @@
+﻿  Error.cpp
+E:\уник\КПО\SELab14\Project1\Project1\Error.cpp(26,9): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "ERROR_ENTRY_NODEF"
+  In.cpp
+  Log.cpp
+  main.cpp
+  Parm.cpp
+E:\уник\КПО\SELab14\Project1\Project1\Parm.cpp(38,19): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+E:\уник\КПО\SELab14\Project1\Project1\Parm.cpp(47,19): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  stdafx.cpp
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 214 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  Project1.vcxproj -> E:\уник\КПО\SELab14\Project1\x64\Release\Project1.exe

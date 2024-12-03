@@ -1,0 +1,3 @@
+﻿  LexAnalize.cpp
+E:\уник\Курсач КПО\Project1\Project1\LexAnalize.cpp(715,52): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Project1.vcxproj -> E:\уник\Курсач КПО\Project1\x64\Debug\Project1.exe
