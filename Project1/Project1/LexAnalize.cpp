@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 #include "LexAnalize.h"
 #include "FST.h"
 #include <iomanip>
@@ -9,14 +9,14 @@
 
 struct PairHash {
 	size_t operator()(const std::pair<std::string, int>& p) const {
-		// Хэшируем строку и целое число, комбинируем их
+		// РҐСЌС€РёСЂСѓРµРј СЃС‚СЂРѕРєСѓ Рё С†РµР»РѕРµ С‡РёСЃР»Рѕ, РєРѕРјР±РёРЅРёСЂСѓРµРј РёС…
 		return std::hash<std::string>()(p.first) ^ (std::hash<int>()(p.second) << 1);
 	}
 };
 
 struct PairEqual {
 	bool operator()(const std::pair<std::string, int>& lhs, const std::pair<std::string, int>& rhs) const {
-		// Сравниваем оба элемента пары
+		// РЎСЂР°РІРЅРёРІР°РµРј РѕР±Р° СЌР»РµРјРµРЅС‚Р° РїР°СЂС‹
 		return lhs.first == rhs.first && lhs.second == rhs.second;
 	}
 };
@@ -297,18 +297,18 @@ namespace LA
 			FST::RELATION('K', 2), FST::RELATION('L', 2), FST::RELATION('z', 2), FST::RELATION('x', 2), FST::RELATION('c', 2), FST::RELATION('v', 2),
 			FST::RELATION('b', 2), FST::RELATION('n', 2), FST::RELATION('m', 2), FST::RELATION(',', 2), FST::RELATION('.', 2), FST::RELATION('/', 2),
 			FST::RELATION('Z', 2), FST::RELATION('X', 2), FST::RELATION('C', 2), FST::RELATION('V', 2), FST::RELATION('B', 2), FST::RELATION('N', 2),
-			FST::RELATION('M', 2), FST::RELATION('<', 2), FST::RELATION('>', 2), FST::RELATION('?', 2), FST::RELATION('ё', 2), FST::RELATION('Ё', 2),
-			FST::RELATION('й', 2), FST::RELATION('ц', 2), FST::RELATION('у', 2), FST::RELATION('к', 2), FST::RELATION('е', 2), FST::RELATION('н', 2),
-			FST::RELATION('г', 2), FST::RELATION('ш', 2), FST::RELATION('щ', 2), FST::RELATION('з', 2), FST::RELATION('х', 2), FST::RELATION('ъ', 2),
-			FST::RELATION('Й', 2), FST::RELATION('Ц', 2), FST::RELATION('У', 2), FST::RELATION('К', 2), FST::RELATION('Е', 2), FST::RELATION('Н', 2),
-			FST::RELATION('Г', 2), FST::RELATION('Ш', 2), FST::RELATION('Щ', 2), FST::RELATION('З', 2), FST::RELATION('Х', 2), FST::RELATION('Ъ', 2),
-			FST::RELATION('ф', 2), FST::RELATION('ы', 2), FST::RELATION('в', 2), FST::RELATION('а', 2), FST::RELATION('п', 2), FST::RELATION('р', 2),
-			FST::RELATION('о', 2), FST::RELATION('л', 2), FST::RELATION('д', 2), FST::RELATION('ж', 2), FST::RELATION('э', 2), FST::RELATION('Ф', 2),
-			FST::RELATION('Ы', 2), FST::RELATION('В', 2), FST::RELATION('А', 2), FST::RELATION('П', 2), FST::RELATION('Р', 2), FST::RELATION('О', 2),
-			FST::RELATION('Л', 2), FST::RELATION('Д', 2), FST::RELATION('Ж', 2), FST::RELATION('Э', 2), FST::RELATION('я', 2), FST::RELATION('ч', 2),
-			FST::RELATION('с', 2), FST::RELATION('м', 2), FST::RELATION('и', 2), FST::RELATION('т', 2), FST::RELATION('ь', 2), FST::RELATION('б', 2),
-			FST::RELATION('ю', 2), FST::RELATION('Я', 2), FST::RELATION('Ч', 2), FST::RELATION('С', 2), FST::RELATION('М', 2), FST::RELATION('И', 2),
-			FST::RELATION('Т', 2), FST::RELATION('Ь', 2), FST::RELATION('Б', 2), FST::RELATION('Ю', 2)
+			FST::RELATION('M', 2), FST::RELATION('<', 2), FST::RELATION('>', 2), FST::RELATION('?', 2), FST::RELATION('С‘', 2), FST::RELATION('РЃ', 2),
+			FST::RELATION('Р№', 2), FST::RELATION('С†', 2), FST::RELATION('Сѓ', 2), FST::RELATION('Рє', 2), FST::RELATION('Рµ', 2), FST::RELATION('РЅ', 2),
+			FST::RELATION('Рі', 2), FST::RELATION('С€', 2), FST::RELATION('С‰', 2), FST::RELATION('Р·', 2), FST::RELATION('С…', 2), FST::RELATION('СЉ', 2),
+			FST::RELATION('Р™', 2), FST::RELATION('Р¦', 2), FST::RELATION('РЈ', 2), FST::RELATION('Рљ', 2), FST::RELATION('Р•', 2), FST::RELATION('Рќ', 2),
+			FST::RELATION('Р“', 2), FST::RELATION('РЁ', 2), FST::RELATION('Р©', 2), FST::RELATION('Р—', 2), FST::RELATION('РҐ', 2), FST::RELATION('РЄ', 2),
+			FST::RELATION('С„', 2), FST::RELATION('С‹', 2), FST::RELATION('РІ', 2), FST::RELATION('Р°', 2), FST::RELATION('Рї', 2), FST::RELATION('СЂ', 2),
+			FST::RELATION('Рѕ', 2), FST::RELATION('Р»', 2), FST::RELATION('Рґ', 2), FST::RELATION('Р¶', 2), FST::RELATION('СЌ', 2), FST::RELATION('Р¤', 2),
+			FST::RELATION('Р«', 2), FST::RELATION('Р’', 2), FST::RELATION('Рђ', 2), FST::RELATION('Рџ', 2), FST::RELATION('Р ', 2), FST::RELATION('Рћ', 2),
+			FST::RELATION('Р›', 2), FST::RELATION('Р”', 2), FST::RELATION('Р–', 2), FST::RELATION('Р­', 2), FST::RELATION('СЏ', 2), FST::RELATION('С‡', 2),
+			FST::RELATION('СЃ', 2), FST::RELATION('Рј', 2), FST::RELATION('Рё', 2), FST::RELATION('С‚', 2), FST::RELATION('СЊ', 2), FST::RELATION('Р±', 2),
+			FST::RELATION('СЋ', 2), FST::RELATION('РЇ', 2), FST::RELATION('Р§', 2), FST::RELATION('РЎ', 2), FST::RELATION('Рњ', 2), FST::RELATION('Р', 2),
+			FST::RELATION('Рў', 2), FST::RELATION('Р¬', 2), FST::RELATION('Р‘', 2), FST::RELATION('Р®', 2)
 		),
 		FST::NODE(1,
 			FST::RELATION('\'', 3)),
@@ -335,18 +335,18 @@ namespace LA
 			FST::RELATION('K', 2), FST::RELATION('L', 2), FST::RELATION('z', 2), FST::RELATION('x', 2), FST::RELATION('c', 2), FST::RELATION('v', 2),
 			FST::RELATION('b', 2), FST::RELATION('n', 2), FST::RELATION('m', 2), FST::RELATION(',', 2), FST::RELATION('.', 2), FST::RELATION('/', 2),
 			FST::RELATION('Z', 2), FST::RELATION('X', 2), FST::RELATION('C', 2), FST::RELATION('V', 2), FST::RELATION('B', 2), FST::RELATION('N', 2),
-			FST::RELATION('M', 2), FST::RELATION('<', 2), FST::RELATION('>', 2), FST::RELATION('?', 2), FST::RELATION('ё', 2), FST::RELATION('Ё', 2),
-			FST::RELATION('й', 2), FST::RELATION('ц', 2), FST::RELATION('у', 2), FST::RELATION('к', 2), FST::RELATION('е', 2), FST::RELATION('н', 2),
-			FST::RELATION('г', 2), FST::RELATION('ш', 2), FST::RELATION('щ', 2), FST::RELATION('з', 2), FST::RELATION('х', 2), FST::RELATION('ъ', 2),
-			FST::RELATION('Й', 2), FST::RELATION('Ц', 2), FST::RELATION('У', 2), FST::RELATION('К', 2), FST::RELATION('Е', 2), FST::RELATION('Н', 2),
-			FST::RELATION('Г', 2), FST::RELATION('Ш', 2), FST::RELATION('Щ', 2), FST::RELATION('З', 2), FST::RELATION('Х', 2), FST::RELATION('Ъ', 2),
-			FST::RELATION('ф', 2), FST::RELATION('ы', 2), FST::RELATION('в', 2), FST::RELATION('а', 2), FST::RELATION('п', 2), FST::RELATION('р', 2),
-			FST::RELATION('о', 2), FST::RELATION('л', 2), FST::RELATION('д', 2), FST::RELATION('ж', 2), FST::RELATION('э', 2), FST::RELATION('Ф', 2),
-			FST::RELATION('Ы', 2), FST::RELATION('В', 2), FST::RELATION('А', 2), FST::RELATION('П', 2), FST::RELATION('Р', 2), FST::RELATION('О', 2),
-			FST::RELATION('Л', 2), FST::RELATION('Д', 2), FST::RELATION('Ж', 2), FST::RELATION('Э', 2), FST::RELATION('я', 2), FST::RELATION('ч', 2),
-			FST::RELATION('с', 2), FST::RELATION('м', 2), FST::RELATION('и', 2), FST::RELATION('т', 2), FST::RELATION('ь', 2), FST::RELATION('б', 2),
-			FST::RELATION('ю', 2), FST::RELATION('Я', 2), FST::RELATION('Ч', 2), FST::RELATION('С', 2), FST::RELATION('М', 2), FST::RELATION('И', 2),
-			FST::RELATION('Т', 2), FST::RELATION('Ь', 2), FST::RELATION('Б', 2), FST::RELATION('Ю', 2),
+			FST::RELATION('M', 2), FST::RELATION('<', 2), FST::RELATION('>', 2), FST::RELATION('?', 2), FST::RELATION('С‘', 2), FST::RELATION('РЃ', 2),
+			FST::RELATION('Р№', 2), FST::RELATION('С†', 2), FST::RELATION('Сѓ', 2), FST::RELATION('Рє', 2), FST::RELATION('Рµ', 2), FST::RELATION('РЅ', 2),
+			FST::RELATION('Рі', 2), FST::RELATION('С€', 2), FST::RELATION('С‰', 2), FST::RELATION('Р·', 2), FST::RELATION('С…', 2), FST::RELATION('СЉ', 2),
+			FST::RELATION('Р™', 2), FST::RELATION('Р¦', 2), FST::RELATION('РЈ', 2), FST::RELATION('Рљ', 2), FST::RELATION('Р•', 2), FST::RELATION('Рќ', 2),
+			FST::RELATION('Р“', 2), FST::RELATION('РЁ', 2), FST::RELATION('Р©', 2), FST::RELATION('Р—', 2), FST::RELATION('РҐ', 2), FST::RELATION('РЄ', 2),
+			FST::RELATION('С„', 2), FST::RELATION('С‹', 2), FST::RELATION('РІ', 2), FST::RELATION('Р°', 2), FST::RELATION('Рї', 2), FST::RELATION('СЂ', 2),
+			FST::RELATION('Рѕ', 2), FST::RELATION('Р»', 2), FST::RELATION('Рґ', 2), FST::RELATION('Р¶', 2), FST::RELATION('СЌ', 2), FST::RELATION('Р¤', 2),
+			FST::RELATION('Р«', 2), FST::RELATION('Р’', 2), FST::RELATION('Рђ', 2), FST::RELATION('Рџ', 2), FST::RELATION('Р ', 2), FST::RELATION('Рћ', 2),
+			FST::RELATION('Р›', 2), FST::RELATION('Р”', 2), FST::RELATION('Р–', 2), FST::RELATION('Р­', 2), FST::RELATION('СЏ', 2), FST::RELATION('С‡', 2),
+			FST::RELATION('СЃ', 2), FST::RELATION('Рј', 2), FST::RELATION('Рё', 2), FST::RELATION('С‚', 2), FST::RELATION('СЊ', 2), FST::RELATION('Р±', 2),
+			FST::RELATION('СЋ', 2), FST::RELATION('РЇ', 2), FST::RELATION('Р§', 2), FST::RELATION('РЎ', 2), FST::RELATION('Рњ', 2), FST::RELATION('Р', 2),
+			FST::RELATION('Рў', 2), FST::RELATION('Р¬', 2), FST::RELATION('Р‘', 2), FST::RELATION('Р®', 2),
 			FST::RELATION('!', 1), FST::RELATION('@', 1), FST::RELATION('#', 1), FST::RELATION('$', 1), FST::RELATION('%', 1), FST::RELATION('^', 1),
 			FST::RELATION('&', 1), FST::RELATION('*', 1), FST::RELATION('(', 1), FST::RELATION(')', 1), FST::RELATION('-', 1), FST::RELATION('_', 1),
 			FST::RELATION('+', 1), FST::RELATION('=', 1), FST::RELATION('~', 1), FST::RELATION('`', 1), FST::RELATION('1', 1), FST::RELATION('2', 1),
@@ -362,18 +362,18 @@ namespace LA
 			FST::RELATION('K', 1), FST::RELATION('L', 1), FST::RELATION('z', 1), FST::RELATION('x', 1), FST::RELATION('c', 1), FST::RELATION('v', 1),
 			FST::RELATION('b', 1), FST::RELATION('n', 1), FST::RELATION('m', 1), FST::RELATION(',', 1), FST::RELATION('.', 1), FST::RELATION('/', 1),
 			FST::RELATION('Z', 1), FST::RELATION('X', 1), FST::RELATION('C', 1), FST::RELATION('V', 1), FST::RELATION('B', 1), FST::RELATION('N', 1),
-			FST::RELATION('M', 1), FST::RELATION('<', 1), FST::RELATION('>', 1), FST::RELATION('?', 1), FST::RELATION('ё', 1), FST::RELATION('Ё', 1),
-			FST::RELATION('й', 1), FST::RELATION('ц', 1), FST::RELATION('у', 1), FST::RELATION('к', 1), FST::RELATION('е', 1), FST::RELATION('н', 1),
-			FST::RELATION('г', 1), FST::RELATION('ш', 1), FST::RELATION('щ', 1), FST::RELATION('з', 1), FST::RELATION('х', 1), FST::RELATION('ъ', 1),
-			FST::RELATION('Й', 1), FST::RELATION('Ц', 1), FST::RELATION('У', 1), FST::RELATION('К', 1), FST::RELATION('Е', 1), FST::RELATION('Н', 1),
-			FST::RELATION('Г', 1), FST::RELATION('Ш', 1), FST::RELATION('Щ', 1), FST::RELATION('З', 1), FST::RELATION('Х', 1), FST::RELATION('Ъ', 1),
-			FST::RELATION('ф', 1), FST::RELATION('ы', 1), FST::RELATION('в', 1), FST::RELATION('а', 1), FST::RELATION('п', 1), FST::RELATION('р', 1),
-			FST::RELATION('о', 1), FST::RELATION('л', 1), FST::RELATION('д', 1), FST::RELATION('ж', 1), FST::RELATION('э', 1), FST::RELATION('Ф', 1),
-			FST::RELATION('Ы', 1), FST::RELATION('В', 1), FST::RELATION('А', 1), FST::RELATION('П', 1), FST::RELATION('Р', 1), FST::RELATION('О', 1),
-			FST::RELATION('Л', 1), FST::RELATION('Д', 1), FST::RELATION('Ж', 1), FST::RELATION('Э', 1), FST::RELATION('я', 1), FST::RELATION('ч', 1),
-			FST::RELATION('с', 1), FST::RELATION('м', 1), FST::RELATION('и', 1), FST::RELATION('т', 1), FST::RELATION('ь', 1), FST::RELATION('б', 1),
-			FST::RELATION('ю', 1), FST::RELATION('Я', 1), FST::RELATION('Ч', 1), FST::RELATION('С', 1), FST::RELATION('М', 1), FST::RELATION('И', 1),
-			FST::RELATION('Т', 1), FST::RELATION('Ь', 1), FST::RELATION('Б', 1), FST::RELATION('Ю', 1)
+			FST::RELATION('M', 1), FST::RELATION('<', 1), FST::RELATION('>', 1), FST::RELATION('?', 1), FST::RELATION('С‘', 1), FST::RELATION('РЃ', 1),
+			FST::RELATION('Р№', 1), FST::RELATION('С†', 1), FST::RELATION('Сѓ', 1), FST::RELATION('Рє', 1), FST::RELATION('Рµ', 1), FST::RELATION('РЅ', 1),
+			FST::RELATION('Рі', 1), FST::RELATION('С€', 1), FST::RELATION('С‰', 1), FST::RELATION('Р·', 1), FST::RELATION('С…', 1), FST::RELATION('СЉ', 1),
+			FST::RELATION('Р™', 1), FST::RELATION('Р¦', 1), FST::RELATION('РЈ', 1), FST::RELATION('Рљ', 1), FST::RELATION('Р•', 1), FST::RELATION('Рќ', 1),
+			FST::RELATION('Р“', 1), FST::RELATION('РЁ', 1), FST::RELATION('Р©', 1), FST::RELATION('Р—', 1), FST::RELATION('РҐ', 1), FST::RELATION('РЄ', 1),
+			FST::RELATION('С„', 1), FST::RELATION('С‹', 1), FST::RELATION('РІ', 1), FST::RELATION('Р°', 1), FST::RELATION('Рї', 1), FST::RELATION('СЂ', 1),
+			FST::RELATION('Рѕ', 1), FST::RELATION('Р»', 1), FST::RELATION('Рґ', 1), FST::RELATION('Р¶', 1), FST::RELATION('СЌ', 1), FST::RELATION('Р¤', 1),
+			FST::RELATION('Р«', 1), FST::RELATION('Р’', 1), FST::RELATION('Рђ', 1), FST::RELATION('Рџ', 1), FST::RELATION('Р ', 1), FST::RELATION('Рћ', 1),
+			FST::RELATION('Р›', 1), FST::RELATION('Р”', 1), FST::RELATION('Р–', 1), FST::RELATION('Р­', 1), FST::RELATION('СЏ', 1), FST::RELATION('С‡', 1),
+			FST::RELATION('СЃ', 1), FST::RELATION('Рј', 1), FST::RELATION('Рё', 1), FST::RELATION('С‚', 1), FST::RELATION('СЊ', 1), FST::RELATION('Р±', 1),
+			FST::RELATION('СЋ', 1), FST::RELATION('РЇ', 1), FST::RELATION('Р§', 1), FST::RELATION('РЎ', 1), FST::RELATION('Рњ', 1), FST::RELATION('Р', 1),
+			FST::RELATION('Рў', 1), FST::RELATION('Р¬', 1), FST::RELATION('Р‘', 1), FST::RELATION('Р®', 1)
 		),
 		FST::NODE(1,
 			FST::RELATION('\'', 3)),
@@ -892,7 +892,7 @@ namespace LA
 
 	void printLexTable(LT::LexTable lt)
 	{
-		std::cout << "Таблица лексем:";
+		std::cout << "РўР°Р±Р»РёС†Р° Р»РµРєСЃРµРј:";
 		int line = 0;
 		for (int i = 0; i < lt.size; i++)
 		{
@@ -912,40 +912,40 @@ namespace LA
 
 	void printIdTable(IT::IdTable it)
 	{
-		std::cout << "\n\nТаблица идентификаторов:\n";
+		std::cout << "\n\nРўР°Р±Р»РёС†Р° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ:\n";
 		for (int i = 0; i < it.size; i++)
 		{
 			if (!it.table[i].isPointer || it.table[i].idtype == 4)
 			{
-				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tИдентификатор: " << it.table[i].id;
+				std::cout << "в„–: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tРРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ: " << it.table[i].id;
 			
 				if (it.table[i].idtype == 1)
 				{
-					std::cout << std::setw(6) << "\tТип: Переменная";
+					std::cout << std::setw(6) << "\tРўРёРї: РџРµСЂРµРјРµРЅРЅР°СЏ";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: int          " << "\tЗначение: " << it.table[i].value.vint;
+						std::cout << std::setw(15) << "\t\tРўРёРї РґР°РЅРЅС‹С…: int          " << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vint;
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: string        ";
+						std::cout << std::setw(15) << "\t\tРўРёРї РґР°РЅРЅС‹С…: string        ";
 						if (it.table[i].value.vstr.str[0] != TT_STR_DEFAULT)
 						{
-							std::cout << "\tЗначение: " << it.table[i].value.vstr.str << std::setw(15) << "\t\tДлина строки: " << it.table[i].value.vstr.len;
+							std::cout << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vstr.str << std::setw(15) << "\t\tР”Р»РёРЅР° СЃС‚СЂРѕРєРё: " << it.table[i].value.vstr.len;
 						}
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: char        ";
+						std::cout << std::setw(15) << "\t\tРўРёРї РґР°РЅРЅС‹С…: char        ";
 						if (it.table[i].value.vchar != TT_CHAR_DEFAULT)
 						{
-							std::cout << "\tЗначение: " << it.table[i].value.vchar;
+							std::cout << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vchar;
 						}
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: bool        ";
-						std::cout << "\tЗначение: ";
+						std::cout << std::setw(15) << "\t\tРўРёРї РґР°РЅРЅС‹С…: bool        ";
+						std::cout << "\tР—РЅР°С‡РµРЅРёРµ: ";
 						if (it.table[i].value.vbool)
 						{
 							std::cout << "true";
@@ -958,76 +958,76 @@ namespace LA
 				}
 				else if (it.table[i].idtype == 2)
 				{
-					std::cout << std::setw(6) << "\tТип: Функция\t";
+					std::cout << std::setw(6) << "\tРўРёРї: Р¤СѓРЅРєС†РёСЏ\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: int\t";
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: string\t";
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: char\t";
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: bool\t";
 					}
 					else if (it.table[i].iddatatype == 5)
 					{
-						std::cout << std::setw(6) << "\tТип данных: void\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: void\t";
 					}
 				}
 				else if (it.table[i].idtype == 3)
 				{
-					std::cout << std::setw(6) << "\tТип: Параметр\t";
+					std::cout << std::setw(6) << "\tРўРёРї: РџР°СЂР°РјРµС‚СЂ\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: int\t\t";
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: string\t\t";
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: char\t\t";
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t\t";
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: bool\t\t";
 					}
 				}
 				else if (it.table[i].idtype == 4)
 				{
-					std::cout << std::setw(6) << "\tТип: Литерал\t";
+					std::cout << std::setw(6) << "\tРўРёРї: Р›РёС‚РµСЂР°Р»\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vint;
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: int\t";
+						std::cout << std::setw(6) << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vint;
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vstr.str << "\tДлина строки: " << it.table[i].value.vstr.len;
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: string\t";
+						std::cout << std::setw(6) << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vstr.str << "\tР”Р»РёРЅР° СЃС‚СЂРѕРєРё: " << it.table[i].value.vstr.len;
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vchar;
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: char\t";
+						std::cout << std::setw(6) << "\tР—РЅР°С‡РµРЅРёРµ: " << it.table[i].value.vchar;
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t";
-						std::cout << std::setw(6) << "\tЗначение: " << (it.table[i].value.vbool ? "true" : "false");
+						std::cout << std::setw(6) << "\tРўРёРї РґР°РЅРЅС‹С…: bool\t";
+						std::cout << std::setw(6) << "\tР—РЅР°С‡РµРЅРёРµ: " << (it.table[i].value.vbool ? "true" : "false");
 					}
 				}
 			}
 			else
 			{
-				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tУказатель на: " << it.table[i].id;
+				std::cout << "в„–: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tРЈРєР°Р·Р°С‚РµР»СЊ РЅР°: " << it.table[i].id;
 				if(it.table[i].PointeridxfirstLE != -1)
 				{
 					std::cout << "(idxfirstLE: " << it.table[i].PointeridxfirstLE << ")";

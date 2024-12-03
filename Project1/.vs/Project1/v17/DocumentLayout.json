@@ -115,8 +115,7 @@
               "ViewState": "AgIAAAwAAAAAAAAAAAAwwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-20T08:19:18.47Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -152,7 +151,7 @@
               "RelativeDocumentMoniker": "Project1\\LexAnalize.cpp",
               "ToolTip": "E:\\\u0443\u043D\u0438\u043A\\\u041A\u0443\u0440\u0441\u0430\u0447 \u041A\u041F\u041E\\Project1\\Project1\\LexAnalize.cpp",
               "RelativeToolTip": "Project1\\LexAnalize.cpp",
-              "ViewState": "AgIAAMMCAAAAAAAAAIAwwP4CAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAMMCAAAAAAAAAIAwwNMCAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-12T20:44:39.744Z",
               "EditorCaption": ""
@@ -179,8 +178,7 @@
               "RelativeToolTip": "Project1\\Log.cpp",
               "ViewState": "AgIAAGoAAAAAAAAAAIAwwIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-12T10:51:48.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T10:51:48.386Z"
             },
             {
               "$type": "Document",
@@ -204,8 +202,7 @@
               "RelativeToolTip": "Project1\\Rules_GRB.h",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAACQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-27T14:02:22.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T14:02:22.365Z"
             },
             {
               "$type": "Document",
@@ -355,8 +352,7 @@
               "RelativeToolTip": "Project1\\IT.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-01T13:08:00.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T13:08:00.287Z"
             },
             {
               "$type": "Document",
@@ -368,8 +364,7 @@
               "RelativeToolTip": "Project1\\Error.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-27T14:11:37.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T14:11:37.125Z"
             },
             {
               "$type": "Document",
@@ -394,8 +389,7 @@
               "RelativeToolTip": "Project1\\LT.h",
               "ViewState": "AgIAAB4AAAAAAAAAAAAAAAwAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-27T14:47:09.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T14:47:09.918Z"
             }
           ]
         }

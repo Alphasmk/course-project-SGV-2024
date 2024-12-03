@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #include "MFST.h"
 #include "Error.h"
@@ -29,8 +29,8 @@ namespace MFST
 		const time_t nowtime = time(NULL);
 		date = localtime(&nowtime);
 		strftime(Date, 50, "%d.%m.%Y %H:%M:%S, %A", date);
-		*rl.stream << "----Ïðîòîêîë rl----" << endl;
-		*rl.stream << "Âðåìÿ ñîçäàíèÿ ïðîòîêîëà: " << Date << endl;
+		*rl.stream << "----ÐŸÑ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð» rl----" << endl;
+		*rl.stream << "Ð’Ñ€ÐµÐ¼Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð»Ð°: " << Date << endl;
 	}
 	MfstState::MfstState()
 	{
@@ -219,7 +219,7 @@ namespace MFST
 		case LENTA_END:
 			MFST_TRACE4("-------> NS_LENTA_END", rl)
 				cout << "--------------------------------------------------------------" << endl;
-			cout << setw(4) << left << "Âñåãî ñòðîê " << lenta_size << ", Ñèíòàêñè÷åñêèé àíàëèç âûïîëíåí áåç îøèáîê" << endl;
+			cout << setw(4) << left << "Ð’ÑÐµÐ³Ð¾ ÑÑ‚Ñ€Ð¾Ðº " << lenta_size << ", Ð¡Ð¸Ð½Ñ‚Ð°ÐºÑÐ¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð°Ð½Ð°Ð»Ð¸Ð· Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½ Ð±ÐµÐ· Ð¾ÑˆÐ¸Ð±Ð¾Ðº" << endl;
 			rc = true;
 			break;
 		case SURPRISE:
@@ -255,7 +255,7 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERRORS err = Error::geterrorin(errid, 0, 0);
-			cout << "Îøèáêà " << err.id << ":" << err.message << " ñòðîêà " << lexTable.table[lpos].sn << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° " << err.id << ":" << err.message << " ÑÑ‚Ñ€Ð¾ÐºÐ° " << lexTable.table[lpos].sn << endl;
 			ERROR_THROW(err.id, lexTable.table[lpos].sn, lexTable.table[lpos].indxTI);
 			rc = buf;
 		}

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 using namespace std;
 
 int _tmain(int argc, const _TCHAR* argv[])
@@ -23,18 +23,18 @@ int _tmain(int argc, const _TCHAR* argv[])
 		LA::printLexTable(lextable);
 		LA::printIdTable(idtable);
 
-		MFST_TRACE_START						//отладка
-			MFST::Mfst mfst(lextable, GRB::getGreibach());			//автомат
-		mfst.start();											// старт синтаксического анализа
+		MFST_TRACE_START						//РѕС‚Р»Р°РґРєР°
+			MFST::Mfst mfst(lextable, GRB::getGreibach());			//Р°РІС‚РѕРјР°С‚
+		mfst.start();											// СЃС‚Р°СЂС‚ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРіРѕ Р°РЅР°Р»РёР·Р°
 
-		mfst.savededucation();									//сохранить правила вывода
+		mfst.savededucation();									//СЃРѕС…СЂР°РЅРёС‚СЊ РїСЂР°РІРёР»Р° РІС‹РІРѕРґР°
 
 		mfst.printrules();
 		Log::Close(log);
 	}
 	catch (Error::ERRORS e)
 	{
-		cout << "Ошибка " << e.id << ": " << e.message << endl << endl;
+		cout << "РћС€РёР±РєР° " << e.id << ": " << e.message << endl << endl;
 		if (e.inext.line)
 			Log::WriteError(log, e);
 		if (e.id != 100)

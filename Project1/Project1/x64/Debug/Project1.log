@@ -1,3 +1,30 @@
-﻿  LexAnalize.cpp
+﻿  Error.cpp
+  FST.cpp
+E:\уник\Курсач КПО\Project1\Project1\FST.cpp(98,23): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  GRB.cpp
+  IT.cpp
+  In.cpp
+  LT.cpp
+  LexAnalize.cpp
 E:\уник\Курсач КПО\Project1\Project1\LexAnalize.cpp(715,52): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Log.cpp
+  MFST.cpp
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(123,7): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(141,5): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(148,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(162,3): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE6"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(177,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE5"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(207,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(214,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(217,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(220,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(226,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "MFST_TRACE4"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(259,4): warning C4002: слишком много аргументов для вызова макроса, подобного функции, "ERROR_THROW"
+E:\уник\Курсач КПО\Project1\Project1\MFST.cpp(279,66): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+  Parm.cpp
+  lib.cpp
+E:\уник\Курсач КПО\Project1\Project1\lib.cpp(9,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+E:\уник\Курсач КПО\Project1\Project1\lib.cpp(29,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  main.cpp
+  stdafx.cpp
   Project1.vcxproj -> E:\уник\Курсач КПО\Project1\x64\Debug\Project1.exe

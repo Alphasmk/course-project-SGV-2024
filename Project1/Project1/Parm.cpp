@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 Parm::PARM Parm::getparm(int argc, const _TCHAR* argv[]) {
     PARM parm;

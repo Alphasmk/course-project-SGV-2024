@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 #include "Rules_GRB.h"
 #include <cstdarg>
 
@@ -97,7 +97,7 @@ Rule::Chain::Chain(short psize, GRBALPHABET s, ...)
 		return rc;
 	}
 
-	char* Rule::getCRule(char* b, short nchain)					// Получить правило в виде N -> цепочка
+	char* Rule::getCRule(char* b, short nchain)					// РџРѕР»СѓС‡РёС‚СЊ РїСЂР°РІРёР»Рѕ РІ РІРёРґРµ N -> С†РµРїРѕС‡РєР°
 	{
 		char bchain[200];
 		b[0] = Chain::alphabet_to_char(nn);
@@ -120,7 +120,7 @@ Rule::Chain::Chain(short psize, GRBALPHABET s, ...)
 		return rc;
 	}
 
-	char* Rule::Chain::getCChain(char* b)					// Получить первую стороку правила
+	char* Rule::Chain::getCChain(char* b)					// РџРѕР»СѓС‡РёС‚СЊ РїРµСЂРІСѓСЋ СЃС‚РѕСЂРѕРєСѓ РїСЂР°РІРёР»Р°
 	{
 		for (int i = 0; i < size; i++)
 			b[i] = Chain::alphabet_to_char(nt[i]);

@@ -1,9 +1,9 @@
-#pragma once
+п»ї#pragma once
 #define GRB_ERROR_SERIES	600
 #define NS(n)	GRB::Rule::Chain::N(n)
 #define TS(n)	GRB::Rule::Chain::T(n)
 #define ISNS(n)	GRB::Rule::Chain::isN(n)
-typedef short GRBALPHABET;				// Символы алфавита грамматики(терминалы > 0, нетерминалы < 0)
+typedef short GRBALPHABET;				// РЎРёРјРІРѕР»С‹ Р°Р»С„Р°РІРёС‚Р° РіСЂР°РјРјР°С‚РёРєРё(С‚РµСЂРјРёРЅР°Р»С‹ > 0, РЅРµС‚РµСЂРјРёРЅР°Р»С‹ < 0)
 namespace GRB
 {
 	struct Rule

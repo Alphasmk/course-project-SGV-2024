@@ -1,9 +1,9 @@
-#pragma once
+п»ї#pragma once
 #define ERROR_THROW(id) throw Error::geterror(id);
 #define ERROR_THROW_IN(id, l, c) throw Error::geterrorin(id, l, c);
 #define ERROR_ENTRY(id, m) {id, m, {-1, -1}}
 #define ERROR_MAXSIZE_MESSAGE 200
-#define ERROR_ENTRY_NODEF(id) ERROR_ENTRY(id, "Неопределенная ошибка")
+#define ERROR_ENTRY_NODEF(id) ERROR_ENTRY(id, "РќРµРѕРїСЂРµРґРµР»РµРЅРЅР°СЏ РѕС€РёР±РєР°")
 #define ERROR_ENTRY_NODEF10(id) ERROR_ENTRY_NODEF(id+0), ERROR_ENTRY_NODEF(id+1), \
                                 ERROR_ENTRY_NODEF(id+2), ERROR_ENTRY_NODEF(id+3), \
                                 ERROR_ENTRY_NODEF(id+4), ERROR_ENTRY_NODEF(id+5), \

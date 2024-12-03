@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 Log::LOG Log::getlog(wchar_t logfile[])
 {
@@ -80,7 +80,7 @@ void Log::WriteLog(LOG log)
 
 	strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", &timeinfo);
 
-	(*log.stream) << "---Ïðîòîêîë--- " << buffer << " ---" << std::endl;
+	(*log.stream) << "---ÐŸÑ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð»--- " << buffer << " ---" << std::endl;
 }
 
 
@@ -97,9 +97,9 @@ void Log::WriteParm(LOG log, Parm::PARM parm)
 
 void Log::WriteIn(LOG log, In::INTAB in)
 {
-	(*log.stream) << "Êîëè÷åñòâî ñèìâîëîâ: " << in.size << std::endl
-		<< "Ïðîèãíîðèðîâàíî: " << in.ignor << std::endl
-		<< "Êîëè÷åñòâî ñòðîê: " << in.lines << std::endl;
+	(*log.stream) << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²: " << in.size << std::endl
+		<< "ÐŸÑ€Ð¾Ð¸Ð³Ð½Ð¾Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾: " << in.ignor << std::endl
+		<< "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð¾Ðº: " << in.lines << std::endl;
 }
 
 void Log::WriteError(LOG log, Error::ERRORS error)
@@ -107,10 +107,10 @@ void Log::WriteError(LOG log, Error::ERRORS error)
 	if (error.id == 100)
 	{
 		std::ofstream* inerr = new std::ofstream("log.txt");
-		(*inerr) << "Îøèáêà " << error.id << ": " << error.message;
+		(*inerr) << "ÐžÑˆÐ¸Ð±ÐºÐ° " << error.id << ": " << error.message;
 		if (error.inext.col >= 0 && error.inext.line >= 0)
 		{
-			(*inerr) << ", ñòðîêà " << error.inext.line << ", ïîçèöèÿ " << error.inext.col << std::endl;
+			(*inerr) << ", ÑÑ‚Ñ€Ð¾ÐºÐ° " << error.inext.line << ", Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ " << error.inext.col << std::endl;
 		}
 		inerr->close();
 		delete inerr;
@@ -118,14 +118,14 @@ void Log::WriteError(LOG log, Error::ERRORS error)
 	}
 	if (log.stream->is_open())
 	{
-		(*log.stream) << "Îøèáêà ";
+		(*log.stream) << "ÐžÑˆÐ¸Ð±ÐºÐ° ";
 		(*log.stream) << error.id;
 		(*log.stream) << ": ";
 		(*log.stream) << error.message;
 	}
 	if (error.inext.col >=0 && error.inext.line >= 0)
 	{
-		(*log.stream) << ", ñòðîêà " << error.inext.line << ", ïîçèöèÿ " << error.inext.col << std::endl;
+		(*log.stream) << ", ÑÑ‚Ñ€Ð¾ÐºÐ° " << error.inext.line << ", Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ " << error.inext.col << std::endl;
 	}
 }
 

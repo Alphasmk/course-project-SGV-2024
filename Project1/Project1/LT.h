@@ -1,78 +1,78 @@
-#pragma once
+п»ї#pragma once
 
-#define LEXEMA_FIXSIZE 1   // фиксированный размер лексемы
-#define LT_MAXSIZE  4096 // максимальное количество строк в таблице лексем
-#define LT_TI_NULLIDX 0xffffffff // нет элемента таблицы индентификаторов
+#define LEXEMA_FIXSIZE 1   // С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Р№ СЂР°Р·РјРµСЂ Р»РµРєСЃРµРјС‹
+#define LT_MAXSIZE  4096 // РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РІ С‚Р°Р±Р»РёС†Рµ Р»РµРєСЃРµРј
+#define LT_TI_NULLIDX 0xffffffff // РЅРµС‚ СЌР»РµРјРµРЅС‚Р° С‚Р°Р±Р»РёС†С‹ РёРЅРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ
 
-#define LEX_INTEGER 't' // лексема для integer
-#define LEX_STRING 't' // лексема для string
-#define LEX_CHAR 't' // лексема для char
-#define LEX_BOOL 't' // лексема для bool
-#define LEX_ID 'i' // лексема для идентификатора
-#define LEX_LITERAL 'l' // лексема для литерала
-#define LEX_BOOLLITERAL 'l' // лексема для bool литерала
-#define LEX_FUNCTION 'f' // лексема для функции
-#define LEX_DECLARE 'd' // лексема для declare
-#define LEX_RETURN 'r' // лексема для return
-#define LEX_PRINT 'p' // лексема для print
-#define LEX_SEMICOLON ';' // лексема для ;
-#define LEX_COMMA ',' // лексема для ,
-#define LEX_LEFTBRACE '{' // лексема для {
-#define LEX_RIGHTBRACE '}' // лексема для }
-#define LEX_LEFTHESIS '(' // лексема для (
-#define LEX_RIGHTHESIS ')' // лексема для )
-#define LEX_RIGHTSQUARE ']' // лексема для ]
-#define LEX_LEFTSQUARE '[' // лексема для [
-#define LEX_PLUS 'v' // лексема для +
-#define LEX_MINUS 'v' // лексема для -
-#define LEX_STAR 'v' // лексема для *
-#define LEX_DIRSLASH 'v' // лексема для /
-#define LEX_MAIN 'm' // лексема для main
-#define LEX_EQUALS '=' // лексема для =
-#define LEX_ISEQUALS 'c' // лексема для ==
-#define LEX_ISNOTEQUALS 'c' // лексема для ==
-#define LEX_GREATEROREQUAL 'c' // лексема для >=
-#define LEX_LESSOREQUAL 'c' // лексема для <=
-#define LEX_GREATER 'c' // лексема для >
-#define LEX_LESS 'c' // лексема для <
-#define LEX_IF 's' // лексема для if
-#define LEX_ELSE 'e' // лексема для else
-#define LEX_POW 'i' // лексема для pow
-#define LEX_EXP 'i' // лексема для exp
-#define LEX_PAUSE 'i' // лексема для pause
+#define LEX_INTEGER 't' // Р»РµРєСЃРµРјР° РґР»СЏ integer
+#define LEX_STRING 't' // Р»РµРєСЃРµРјР° РґР»СЏ string
+#define LEX_CHAR 't' // Р»РµРєСЃРµРјР° РґР»СЏ char
+#define LEX_BOOL 't' // Р»РµРєСЃРµРјР° РґР»СЏ bool
+#define LEX_ID 'i' // Р»РµРєСЃРµРјР° РґР»СЏ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР°
+#define LEX_LITERAL 'l' // Р»РµРєСЃРµРјР° РґР»СЏ Р»РёС‚РµСЂР°Р»Р°
+#define LEX_BOOLLITERAL 'l' // Р»РµРєСЃРµРјР° РґР»СЏ bool Р»РёС‚РµСЂР°Р»Р°
+#define LEX_FUNCTION 'f' // Р»РµРєСЃРµРјР° РґР»СЏ С„СѓРЅРєС†РёРё
+#define LEX_DECLARE 'd' // Р»РµРєСЃРµРјР° РґР»СЏ declare
+#define LEX_RETURN 'r' // Р»РµРєСЃРµРјР° РґР»СЏ return
+#define LEX_PRINT 'p' // Р»РµРєСЃРµРјР° РґР»СЏ print
+#define LEX_SEMICOLON ';' // Р»РµРєСЃРµРјР° РґР»СЏ ;
+#define LEX_COMMA ',' // Р»РµРєСЃРµРјР° РґР»СЏ ,
+#define LEX_LEFTBRACE '{' // Р»РµРєСЃРµРјР° РґР»СЏ {
+#define LEX_RIGHTBRACE '}' // Р»РµРєСЃРµРјР° РґР»СЏ }
+#define LEX_LEFTHESIS '(' // Р»РµРєСЃРµРјР° РґР»СЏ (
+#define LEX_RIGHTHESIS ')' // Р»РµРєСЃРµРјР° РґР»СЏ )
+#define LEX_RIGHTSQUARE ']' // Р»РµРєСЃРµРјР° РґР»СЏ ]
+#define LEX_LEFTSQUARE '[' // Р»РµРєСЃРµРјР° РґР»СЏ [
+#define LEX_PLUS 'v' // Р»РµРєСЃРµРјР° РґР»СЏ +
+#define LEX_MINUS 'v' // Р»РµРєСЃРµРјР° РґР»СЏ -
+#define LEX_STAR 'v' // Р»РµРєСЃРµРјР° РґР»СЏ *
+#define LEX_DIRSLASH 'v' // Р»РµРєСЃРµРјР° РґР»СЏ /
+#define LEX_MAIN 'm' // Р»РµРєСЃРµРјР° РґР»СЏ main
+#define LEX_EQUALS '=' // Р»РµРєСЃРµРјР° РґР»СЏ =
+#define LEX_ISEQUALS 'c' // Р»РµРєСЃРµРјР° РґР»СЏ ==
+#define LEX_ISNOTEQUALS 'c' // Р»РµРєСЃРµРјР° РґР»СЏ ==
+#define LEX_GREATEROREQUAL 'c' // Р»РµРєСЃРµРјР° РґР»СЏ >=
+#define LEX_LESSOREQUAL 'c' // Р»РµРєСЃРµРјР° РґР»СЏ <=
+#define LEX_GREATER 'c' // Р»РµРєСЃРµРјР° РґР»СЏ >
+#define LEX_LESS 'c' // Р»РµРєСЃРµРјР° РґР»СЏ <
+#define LEX_IF 's' // Р»РµРєСЃРµРјР° РґР»СЏ if
+#define LEX_ELSE 'e' // Р»РµРєСЃРµРјР° РґР»СЏ else
+#define LEX_POW 'i' // Р»РµРєСЃРµРјР° РґР»СЏ pow
+#define LEX_EXP 'i' // Р»РµРєСЃРµРјР° РґР»СЏ exp
+#define LEX_PAUSE 'i' // Р»РµРєСЃРµРјР° РґР»СЏ pause
 
-namespace LT // таблица лексем
+namespace LT // С‚Р°Р±Р»РёС†Р° Р»РµРєСЃРµРј
 {
 	struct Entry
 	{
-		char lexema; // лексема
-		int sn; // номер строки
-		int idxTI; // индекс в таблице идентификаторов
+		char lexema; // Р»РµРєСЃРµРјР°
+		int sn; // РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё
+		int idxTI; // РёРЅРґРµРєСЃ РІ С‚Р°Р±Р»РёС†Рµ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ
 	};
 
 	struct LexTable
 	{
-		int maxsize; // максимальный размер таблицы
-		int size; // текущий размер таблицы
-		Entry* table; // таблица лексем
+		int maxsize; // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
+		int size; // С‚РµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
+		Entry* table; // С‚Р°Р±Р»РёС†Р° Р»РµРєСЃРµРј
 	};
 
-	LexTable Create( // создание таблицы лексем
-		int size // максимальный размер таблицы
+	LexTable Create( // СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ Р»РµРєСЃРµРј
+		int size // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
 	);
 
-	void Add( // добавление лексемы в таблицу
-		LexTable& lextable, // таблица лексем
-		Entry& entry // лексема
+	void Add( // РґРѕР±Р°РІР»РµРЅРёРµ Р»РµРєСЃРµРјС‹ РІ С‚Р°Р±Р»РёС†Сѓ
+		LexTable& lextable, // С‚Р°Р±Р»РёС†Р° Р»РµРєСЃРµРј
+		Entry& entry // Р»РµРєСЃРµРјР°
 	);
 
-	Entry GetEntry( // получение лексемы из таблицы
-		LexTable& lextable, // таблица лексем
-		int n // номер лексемы
+	Entry GetEntry( // РїРѕР»СѓС‡РµРЅРёРµ Р»РµРєСЃРµРјС‹ РёР· С‚Р°Р±Р»РёС†С‹
+		LexTable& lextable, // С‚Р°Р±Р»РёС†Р° Р»РµРєСЃРµРј
+		int n // РЅРѕРјРµСЂ Р»РµРєСЃРµРјС‹
 	);
 
-	void Delete( // удаление таблицы лексем
-		LexTable& lextable // таблица лексем
+	void Delete( // СѓРґР°Р»РµРЅРёРµ С‚Р°Р±Р»РёС†С‹ Р»РµРєСЃРµРј
+		LexTable& lextable // С‚Р°Р±Р»РёС†Р° Р»РµРєСЃРµРј
 	);
 
 }

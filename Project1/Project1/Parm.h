@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <tchar.h>
 #define PARM_IN L"-in:"
 #define PARM_OUT L"-out:"

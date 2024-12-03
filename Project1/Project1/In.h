@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define IN_MAX_LEN_TEXT 1024*1024
 #define IN_CODE_ENDL '|'
 #define IN_CODE_TABLE {\
