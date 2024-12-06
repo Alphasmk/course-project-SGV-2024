@@ -30,6 +30,15 @@ int _tmain(int argc, const _TCHAR* argv[])
 		mfst.savededucation();									//сохранить правила вывода
 
 		mfst.printrules();
+
+		for (int i = 0; i < lextable.size; i++)
+		{
+			if (lextable.table[i - 1].lexema == LEX_EQUALS)
+			{
+				PolishNotation::PolishNotation(i, idtable, lextable);
+			}
+		}
+		LA::printLexTable(lextable);
 		Log::Close(log);
 	}
 	catch (Error::ERRORS e)

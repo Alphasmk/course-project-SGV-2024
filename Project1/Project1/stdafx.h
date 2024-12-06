@@ -10,6 +10,7 @@
 #include "GRB.h"
 #include "LexAnalize.h"
 #include "MFST.h"
+#include "PolishNotation.h"
 
 #include <cstdarg>
 #include <ctime>

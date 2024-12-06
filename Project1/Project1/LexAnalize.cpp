@@ -480,6 +480,7 @@ namespace LA
 		stack<string> functionPrefix;
 		map<string, int> foundIds;
 		short litCounter = 1;
+		int idTableIndex = 1;
 		while (i < words.size())
 		{
 			if (checkChain(words[i].first, typePlus))
@@ -587,6 +588,8 @@ namespace LA
 			else if (checkChain(words[i].first, typePow))
 			{
 				LT::Entry entry = { LEX_POW, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, words[i].first.c_str());
@@ -598,6 +601,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeExp))
 			{
 				LT::Entry entry = { LEX_EXP, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, words[i].first.c_str());
@@ -609,6 +614,8 @@ namespace LA
 			else if (checkChain(words[i].first, typePause))
 			{
 				LT::Entry entry = { LEX_PAUSE, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, words[i].first.c_str());
@@ -671,6 +678,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeTrue) || checkChain(words[i].first, typeFalse))
 			{
 				LT::Entry entry = { LEX_BOOLLITERAL, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				bool isPointer = false;
@@ -692,6 +701,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeCharLiteral))
 			{
 				LT::Entry entry = { LEX_LITERAL, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, ("L" + to_string(litCounter)).c_str());
@@ -705,6 +716,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeStringLiteral))
 			{
 				LT::Entry entry = { LEX_LITERAL, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, ("L" + to_string(litCounter)).c_str());
@@ -719,6 +732,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeNumbLiteral))
 			{
 				LT::Entry entry = { LEX_LITERAL, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				IT::Entry identry;
 				strcpy(identry.id, ("L" + to_string(litCounter)).c_str());
@@ -732,6 +747,8 @@ namespace LA
 			else if (checkChain(words[i].first, typeIdentificator))
 			{
 				LT::Entry entry = { LEX_ID, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
 				string buf = words[i].first;
 				if (foundIds.count(words[i].first) != 0)
@@ -746,6 +763,7 @@ namespace LA
 						strcpy(identry.id, words[i].first.c_str());
 						identry.idxfirstLE = i;
 						identry.isPointer = true;
+						identry.idtype = IT::F;
 						identry.PointeridxfirstLE = foundIds[words[i].first];
 						ids.push_back({ words[i].first, identry });
 					}
@@ -907,6 +925,10 @@ namespace LA
 			{
 				std::cout << LT::GetEntry(lt, i).lexema;
 			}
+		}
+		for (int i = 0; i < lt.size; i++)
+		{
+			cout << "\n" << lt.table[i].lexema << "      " << lt.table[i].idxTI << endl;
 		}
 	}
 

@@ -140,12 +140,14 @@
     <ClCompile Include="GRB.cpp" />
     <ClCompile Include="MFST.cpp" />
     <ClCompile Include="lib.cpp" />
+    <ClCompile Include="PolishNotation.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="FST.h" />
     <ClInclude Include="GRB.h" />
+    <ClInclude Include="PolishNotation.h" />
     <ClInclude Include="Rules_GRB.h" />
     <ClInclude Include="MFST.h" />
     <ClInclude Include="In.h" />

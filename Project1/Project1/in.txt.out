@@ -1,11 +1,13 @@
 integer function fi(bool x, integer y)|
 {|
 declare bool c;|
-c = true;|
 declare char d;|
-d = 'D';|
 declare integer z;|
-z= x*(x+y);|
+declare integer l;|
+z = (_exp(x,y) + x * y) * l;|
+z= x*(x+y*x) - z * l;|
+d = 'D';|
+c = true;|
 return z;|
 };|
 string function fs(string a, string b)|
@@ -38,9 +40,10 @@ x = 1;|
 y = 5;|
 sa = '1234567890';|
 sb = '1234567890';|
-z = _exp(4);|
-z = fi(x,y);|
+z = _exp(4) + 5;|
+z = fi(x,y) + x * y;|
 sc = fs(sa,sb);|
+x = _pow(2, 5, x, y, 10);|
 print 'контрольный пример';|
 print z;|
 print sc;|

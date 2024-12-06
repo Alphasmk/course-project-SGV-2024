@@ -10,5 +10,4 @@ namespace LA
 	bool checkChain(std::string, FST::FST);
 	void printLexTable(LT::LexTable);
 	void printIdTable(IT::IdTable);
-	void searchScope(int& lb, int& rb, bool& isInScope, const std::vector<std::pair<std::string, int>> words, int&);
 };
