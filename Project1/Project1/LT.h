@@ -23,10 +23,10 @@
 #define LEX_RIGHTHESIS ')' // лексема для )
 #define LEX_RIGHTSQUARE ']' // лексема для ]
 #define LEX_LEFTSQUARE '[' // лексема для [
-#define LEX_PLUS '+' // лексема для +
-#define LEX_MINUS '-' // лексема для -
-#define LEX_STAR '*' // лексема для *
-#define LEX_DIRSLASH '/' // лексема для /
+#define LEX_PLUS 'v' // лексема для +
+#define LEX_MINUS 'v' // лексема для -
+#define LEX_STAR 'v' // лексема для *
+#define LEX_DIRSLASH 'v' // лексема для /
 #define LEX_MAIN 'm' // лексема для main
 #define LEX_EQUALS '=' // лексема для =
 #define LEX_ISEQUALS 'c' // лексема для ==
@@ -48,6 +48,7 @@ namespace LT // таблица лексем
 		char lexema; // лексема
 		int sn; // номер строки
 		int idxTI; // индекс в таблице идентификаторов
+		int idxOP = -1; // индекс в таблице операторов
 	};
 
 	struct LexTable

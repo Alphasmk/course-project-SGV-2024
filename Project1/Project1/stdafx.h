@@ -11,6 +11,8 @@
 #include "LexAnalize.h"
 #include "MFST.h"
 #include "PolishNotation.h"
+#include "OT.h"
+#include "SemAnalize.h"
 
 #include <cstdarg>
 #include <ctime>

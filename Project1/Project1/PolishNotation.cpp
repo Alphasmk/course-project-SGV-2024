@@ -1,31 +1,40 @@
 ﻿#include "stdafx.h"
 #include "PolishNotation.h"
+#include "OT.h"
 
 namespace PolishNotation
 {
-	int checkPriority(char symb)
+	int checkPriority(char symb, LT::Entry entry, OT::OpTable& op)
 	{
-		switch (symb)
+		bool isFound = false;
+		if (symb == 'v')
 		{
-		case '(':
-		case ')':
+			switch (op.table[entry.idxOP].operatorType)
+			{
+			case OT::A:
+			case OT::S:
+				return 1;
+				break;
+			case OT::M:
+			case OT::D:
+				return 2;
+				break;
+			default:
+				return -1;
+			}
+		}
+		else
+		{
 			return 0;
-			break;
-		case '+':
-		case '-':
-			return 1;
-			break;
-		case '*':
-		case '/':
-			return 2;
-			break;
-		default:
-			return -1;
+		}
+		if (!isFound)
+		{
+			ERROR_THROW(700);
 		}
 	}
 
-    void PolishNotation(int iter, IT::IdTable& it, LT::LexTable& lt)
-    {
+	void PolishNotation(int iter, IT::IdTable& it, LT::LexTable& lt, OT::OpTable& op)
+	{
 		stack<LT::Entry> symbStack;
 		LT::Entry outstr[200];
 		int j = 0;
@@ -33,7 +42,7 @@ namespace PolishNotation
 		bool isFunction = false;
 		int paramCounter = 0, len = 0, lenout = 0, semicolonid, hesis = 0;
 
-        // Определяем индекс точки с запятой (;) и длину выражения
+		// Определяем индекс точки с запятой (;) и длину выражения
 		for (int i = iter; lt.table[i].lexema != ';'; i++)
 		{
 			len = i;
@@ -64,9 +73,9 @@ namespace PolishNotation
 					}
 					hesis++;
 				}
-				else if (!symbStack.empty() && checkPriority(lt.table[iter].lexema) <= checkPriority(symbStack.top().lexema) && lt.table[iter].lexema != '(')
+				else if (!symbStack.empty() && checkPriority(lt.table[iter].lexema, lt.table[iter], op) <= checkPriority(symbStack.top().lexema, symbStack.top(), op) && lt.table[iter].lexema != '(')
 				{
-					while (!symbStack.empty() && checkPriority(symbStack.top().lexema) >= checkPriority(lt.table[iter].lexema))
+					while (!symbStack.empty() && checkPriority(symbStack.top().lexema, symbStack.top(), op) >= checkPriority(lt.table[iter].lexema, lt.table[iter], op))
 					{
 						outstr[lenout++] = symbStack.top();
 						symbStack.pop();
@@ -104,6 +113,7 @@ namespace PolishNotation
 					LT::Entry entry;
 					entry.lexema = '0' + paramCounter;
 					entry.sn = lt.table[iter].sn;
+					paramCounter = 0;
 					symbStack.push(entry);
 					entry.lexema = '@';
 					entry.sn = lt.table[iter].sn;
@@ -147,14 +157,13 @@ namespace PolishNotation
 			}
 		}
 
-        // Переносим оставшиеся элементы из стека в выходной массив
-        while (!symbStack.empty())
-        {
-            outstr[lenout++] = symbStack.top();
-            symbStack.pop();
-        }
+		// Переносим оставшиеся элементы из стека в выходной массив
+		while (!symbStack.empty())
+		{
+			outstr[lenout++] = symbStack.top();
+			symbStack.pop();
+		}
 
-        // Записываем результат обратно в таблицу `lt`
 		// Записываем результат обратно в таблицу `lt`
 		for (int i = 0; i < lenout; i++)
 		{
@@ -171,12 +180,12 @@ namespace PolishNotation
 			lt.table[i].sn = lt.table[semicolonid].sn; // Обновляем номер строки, если нужно
 			lt.table[i].idxTI = -1;        // Сбрасываем индекс идентификатора, если нужно
 		}
-    }
+	}
 
 
 	bool isSeparator(char symb)
 	{
-		char check[] = ",()+-*/";
+		char check[] = ",()v";
 
 		for (int i = 0; i < strlen(check); i++)
 		{

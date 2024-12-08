@@ -1,6 +1,6 @@
 Типы данных:
 int(1 byte)
-string(8 byte)
+string(12 byte)
 char(1 byte)
 bool(1 byte)
 

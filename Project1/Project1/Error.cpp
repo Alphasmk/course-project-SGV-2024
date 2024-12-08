@@ -41,7 +41,13 @@ namespace Error
 	  ERROR_ENTRY(603, "Ошибка в параметрах функции"),
 	  ERROR_ENTRY(604, "Ошибка в параметрах вызываемой функции"),
 	  ERROR_ENTRY(605, "Ошибка в параметрах условного оператора"),
-	  ERROR_ENTRY_NODEF10(700), ERROR_ENTRY_NODEF10(800), ERROR_ENTRY_NODEF10(900)
+	  ERROR_ENTRY_NODEF(606), ERROR_ENTRY_NODEF(607), ERROR_ENTRY_NODEF(608), ERROR_ENTRY_NODEF(609), ERROR_ENTRY_NODEF(610),
+	  ERROR_ENTRY_NODEF10(610), ERROR_ENTRY_NODEF10(620), ERROR_ENTRY_NODEF10(630), ERROR_ENTRY_NODEF10(640), ERROR_ENTRY_NODEF10(650),
+	  ERROR_ENTRY_NODEF10(660), ERROR_ENTRY_NODEF10(670), ERROR_ENTRY_NODEF10(680),  ERROR_ENTRY_NODEF10(690),
+	  ERROR_ENTRY(700, "Ошибка при обработке оператора польской нотации"),
+	  ERROR_ENTRY(701, "Main не объявлен"), ERROR_ENTRY(702, "Ошибочное кол-во параметров функции _pow()"), ERROR_ENTRY(703, "Ошибочное кол-во параметров функции _exp()"), ERROR_ENTRY(704, "Неверный тип данных параметра функции _pow()"), ERROR_ENTRY(705, "Неверный тип данных параметра функции _exp()"),
+	  ERROR_ENTRY(706, "Функция _pause() должна вызываться без параметров"), ERROR_ENTRY_NODEF(707), ERROR_ENTRY_NODEF(708), ERROR_ENTRY_NODEF(709),
+	  ERROR_ENTRY_NODEF100(800)
 	};
 
 	ERRORS geterror(int id)

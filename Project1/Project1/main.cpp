@@ -17,11 +17,14 @@ int _tmain(int argc, const _TCHAR* argv[])
 		vector<pair<string, IT::Entry>> ids;
 		LT::LexTable lextable = LT::Create(in.size);
 		IT::IdTable idtable = IT::Create(in.size);
+		OT::OpTable optable = OT::Create();
 		IT::Entry enter;
 
-		LA::LexAnalize(in, lextable, idtable, ids);
+		LA::LexAnalize(in, lextable, idtable, optable, ids);
 		LA::printLexTable(lextable);
+		SemAnalize::SemAnalize(lextable, idtable);
 		LA::printIdTable(idtable);
+		OT::Print(optable);
 
 		MFST_TRACE_START						//отладка
 			MFST::Mfst mfst(lextable, GRB::getGreibach());			//автомат
@@ -35,11 +38,14 @@ int _tmain(int argc, const _TCHAR* argv[])
 		{
 			if (lextable.table[i - 1].lexema == LEX_EQUALS)
 			{
-				PolishNotation::PolishNotation(i, idtable, lextable);
+				PolishNotation::PolishNotation(i, idtable, lextable, optable);
 			}
 		}
 		LA::printLexTable(lextable);
 		Log::Close(log);
+		LT::Delete(lextable);
+		IT::Delete(idtable);
+		OT::Delete(optable);
 	}
 	catch (Error::ERRORS e)
 	{

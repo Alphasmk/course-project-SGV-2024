@@ -390,7 +390,7 @@ namespace LA
 
 	);
 
-	void LexAnalize(In::INTAB& in, LT::LexTable& lt, IT::IdTable& it, std::vector<std::pair<std::string, IT::Entry>>& ids)
+	void LexAnalize(In::INTAB& in, LT::LexTable& lt, IT::IdTable& it, OT::OpTable& ot, std::vector<std::pair<std::string, IT::Entry>>& ids)
 	{
 		std::string text = "";
 
@@ -486,12 +486,18 @@ namespace LA
 			if (checkChain(words[i].first, typePlus))
 			{
 				LT::Entry entry = { LEX_PLUS, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::A, i - words[i].second + 1};
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeMinus))
 			{
 				LT::Entry entry = { LEX_MINUS, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::S, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeInteger))
 			{
@@ -526,32 +532,50 @@ namespace LA
 			else if (checkChain(words[i].first, typeIsEquals))
 			{
 				LT::Entry entry = { LEX_ISEQUALS, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::IE, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeIsNotEquals))
 			{
 				LT::Entry entry = { LEX_ISNOTEQUALS, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::INE, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeLessOrEquals))
 			{
 				LT::Entry entry = { LEX_LESSOREQUAL, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::LE, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeGreaterOrEquals))
 			{
 				LT::Entry entry = { LEX_GREATEROREQUAL, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::GE, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeGreater))
 			{
 				LT::Entry entry = { LEX_GREATER, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::G, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeLess))
 			{
 				LT::Entry entry = { LEX_LESS, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::L, i - words[i].second };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeFunction))
 			{
@@ -663,12 +687,18 @@ namespace LA
 			else if (checkChain(words[i].first, typeDel))
 			{
 				LT::Entry entry = { LEX_DIRSLASH, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::D, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeMulti))
 			{
 				LT::Entry entry = { LEX_STAR, words[i].second };
+				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
+				OT::Operator oper = { OT::M, i - words[i].second + 1 };
+				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeEquals))
 			{
@@ -928,7 +958,15 @@ namespace LA
 		}
 		for (int i = 0; i < lt.size; i++)
 		{
-			cout << "\n" << lt.table[i].lexema << "      " << lt.table[i].idxTI << endl;
+			cout << "\n" << lt.table[i].lexema << "      " << lt.table[i].idxTI;
+			if (lt.table[i].idxOP != -1)
+			{
+				cout << '\t' << lt.table[i].idxOP << endl;
+			}
+			else
+			{
+				cout << endl;
+			}
 		}
 	}
 

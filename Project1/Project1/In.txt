@@ -4,8 +4,8 @@ declare bool c;
 declare char d;
 declare integer z;
 declare integer l;
-z = (_exp(x,y) + x * y) * l;
 z= x*(x+y*x) - z * l;
+z = 'dasjdoasjdoagdsuyasgu';
 d = 'D';
 c = true;
 return z;
@@ -13,7 +13,7 @@ return z;
 string function fs(string a, string b)
 {
 declare integer k;
-k = _pow(k, 2);
+k = _pow(2, 6);
 return k;
 };
 main
@@ -36,17 +36,14 @@ else
 [
 x = y;
 ];
-x = 1;
+x = 678;
 y = 5;
 sa = '1234567890';
 sb = '1234567890';
-z = _exp(4) + 5;
-z = fi(x,y) + x * y;
+z = _exp(4, 6) + 5;
 sc = fs(sa,sb);
-x = _pow(2, 5, x, y, 10);
+x = _pow(2, 5) + x;
 print 'контрольный пример';
-print z;
-print sc;
 _pause();
 return 0;
 };
