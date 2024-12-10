@@ -11,7 +11,7 @@ namespace GRB
 	//  Грамматика (Грейбах) 
 	Greibach greibach(NS('S'), TS('$'),				//стартовый символ, дно стека
 		6,											//количество правил
-		Rule(NS('S'), GRB_ERROR_SERIES + 0,			//Неверная структура программы
+		Rule(NS('S'), GRB_ERROR_SERIES + 0,			
 			4,		//S →	m{NrE;};|tfi(F){NrE;};S|m{NrE;};S|tfi(F){NrE;};|i{NrE;}
 			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
 			//Rule::Chain(8, TS('i'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
@@ -29,8 +29,10 @@ namespace GRB
 			Rule::Chain(5, TS('d'), TS('t'), TS('i'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('r'), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
-			Rule::Chain(3, TS('p'), NS('E'), TS(';')),
-			Rule::Chain(4, TS('p'), NS('E'), TS(';'), NS('N')),
+			Rule::Chain(4, TS('i'), NS('E'), TS(';'), NS('N')),
+			Rule::Chain(3, NS('E'), TS(';'), NS('N')),
+			//Rule::Chain(3, TS('p'), NS('E'), TS(';')),
+			//Rule::Chain(4, TS('p'), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(10, TS('s'), TS('('), TS('i'), TS('c'), TS('i'), TS(')'), TS('['), NS('N'), TS(']'), NS('N')),
 			Rule::Chain(11, TS('s'), TS('('), TS('i'), TS('c'), TS('i'), TS(')'), TS('['), NS('N'), TS(']'), TS('e'), NS('N')),
 			//Rule::Chain(11, TS('e'), TS('s'), TS('('), TS('i'), TS('c'), TS('i'), TS(')'), TS('['), NS('N'), TS(']'), NS('N')),
@@ -63,8 +65,8 @@ namespace GRB
 		),
 		Rule(NS('M'), GRB_ERROR_SERIES + 2,			//Выражение
 			2,		//M →vE|vEM
-			Rule::Chain(3, TS('v'), NS('E'), NS('M')),
-			Rule::Chain(2, TS('v'), NS('E'))
+			Rule::Chain(2, TS('v'), NS('E')),
+			Rule::Chain(3, TS('v'), NS('E'), NS('M'))
 		)
 	);
 }

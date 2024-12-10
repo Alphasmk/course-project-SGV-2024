@@ -14,7 +14,6 @@
 #define LEX_FUNCTION 'f' // лексема для функции
 #define LEX_DECLARE 'd' // лексема для declare
 #define LEX_RETURN 'r' // лексема для return
-#define LEX_PRINT 'p' // лексема для print
 #define LEX_SEMICOLON ';' // лексема для ;
 #define LEX_COMMA ',' // лексема для ,
 #define LEX_LEFTBRACE '{' // лексема для {
@@ -40,6 +39,7 @@
 #define LEX_POW 'i' // лексема для pow
 #define LEX_EXP 'i' // лексема для exp
 #define LEX_PAUSE 'i' // лексема для pause
+#define LEX_PRINT 'i' // лексема для print
 
 namespace LT // таблица лексем
 {

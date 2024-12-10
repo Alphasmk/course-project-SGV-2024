@@ -101,12 +101,43 @@ namespace LA
 		FST::NODE()
 	);
 
-	FST::FST typePrint("", 6,
-		FST::NODE(1, FST::RELATION('p', 1)),
-		FST::NODE(1, FST::RELATION('r', 2)),
-		FST::NODE(1, FST::RELATION('i', 3)),
-		FST::NODE(1, FST::RELATION('n', 4)),
-		FST::NODE(1, FST::RELATION('t', 5)),
+	FST::FST typePrintInt("", 10,
+		FST::NODE(1, FST::RELATION('_', 1)),
+		FST::NODE(1, FST::RELATION('p', 2)),
+		FST::NODE(1, FST::RELATION('r', 3)),
+		FST::NODE(1, FST::RELATION('i', 4)),
+		FST::NODE(1, FST::RELATION('n', 5)),
+		FST::NODE(1, FST::RELATION('t', 6)),
+		FST::NODE(1, FST::RELATION('I', 7)),
+		FST::NODE(1, FST::RELATION('n', 8)),
+		FST::NODE(1, FST::RELATION('t', 9)),
+		FST::NODE()
+	);
+
+	FST::FST typePrintStr("", 10,
+		FST::NODE(1, FST::RELATION('_', 1)),
+		FST::NODE(1, FST::RELATION('p', 2)),
+		FST::NODE(1, FST::RELATION('r', 3)),
+		FST::NODE(1, FST::RELATION('i', 4)),
+		FST::NODE(1, FST::RELATION('n', 5)),
+		FST::NODE(1, FST::RELATION('t', 6)),
+		FST::NODE(1, FST::RELATION('S', 7)),
+		FST::NODE(1, FST::RELATION('t', 8)),
+		FST::NODE(1, FST::RELATION('r', 9)),
+		FST::NODE()
+	);
+
+	FST::FST typePrintBool("", 11,
+		FST::NODE(1, FST::RELATION('_', 1)),
+		FST::NODE(1, FST::RELATION('p', 2)),
+		FST::NODE(1, FST::RELATION('r', 3)),
+		FST::NODE(1, FST::RELATION('i', 4)),
+		FST::NODE(1, FST::RELATION('n', 5)),
+		FST::NODE(1, FST::RELATION('t', 6)),
+		FST::NODE(1, FST::RELATION('B', 7)),
+		FST::NODE(1, FST::RELATION('o', 8)),
+		FST::NODE(1, FST::RELATION('o', 9)),
+		FST::NODE(1, FST::RELATION('l', 10)),
 		FST::NODE()
 	);
 
@@ -488,7 +519,7 @@ namespace LA
 				LT::Entry entry = { LEX_PLUS, words[i].second };
 				entry.idxOP = ot.size;
 				LT::Add(lt, entry);
-				OT::Operator oper = { OT::A, i - words[i].second + 1};
+				OT::Operator oper = { OT::A, i - words[i].second + 1 };
 				OT::Add(ot, oper);
 			}
 			else if (checkChain(words[i].first, typeMinus))
@@ -501,31 +532,55 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeInteger))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_INTEGER, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeIf))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_IF, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeElse))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_ELSE, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeString))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_STRING, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeChar))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_CHAR, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeBool))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_BOOL, words[i].second };
 				LT::Add(lt, entry);
 			}
@@ -585,24 +640,48 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeDeclare))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_DECLARE, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeReturn))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_RETURN, words[i].second };
 				LT::Add(lt, entry);
 			}
 			else if (checkChain(words[i].first, typeMain))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_MAIN, words[i].second };
 				LT::Add(lt, entry);
 				functionPrefix.push(words[i].first);
 			}
-			else if (checkChain(words[i].first, typePrint))
+			else if (checkChain(words[i].first, typePrintInt) || checkChain(words[i].first, typePrintStr) || checkChain(words[i].first, typePrintBool))
 			{
+				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_PRINT, words[i].second };
+				entry.idxTI = idTableIndex;
+				idTableIndex++;
 				LT::Add(lt, entry);
+				IT::Entry identry;
+				strcpy(identry.id, words[i].first.c_str());
+				identry.iddatatype = IT::VD;
+				identry.idtype = IT::F;
+				identry.idxfirstLE = i;
+				ids.push_back({ words[i].first, identry });
 			}
 			else if (checkChain(words[i].first, typeLeftBrace))
 			{
@@ -611,6 +690,10 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typePow))
 			{
+				if (checkChain(words[i - 1].first, typeFunction))
+				{
+					ERROR_THROW_IN(118, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_POW, words[i].second };
 				entry.idxTI = idTableIndex;
 				idTableIndex++;
@@ -624,6 +707,10 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeExp))
 			{
+				if (checkChain(words[i - 1].first, typeFunction))
+				{
+					ERROR_THROW_IN(119, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_EXP, words[i].second };
 				entry.idxTI = idTableIndex;
 				idTableIndex++;
@@ -637,6 +724,10 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typePause))
 			{
+				if (checkChain(words[i - 1].first, typeFunction))
+				{
+					ERROR_THROW_IN(120, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_PAUSE, words[i].second };
 				entry.idxTI = idTableIndex;
 				idTableIndex++;
@@ -707,6 +798,10 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeTrue) || checkChain(words[i].first, typeFalse))
 			{
+				if (checkChain(words[i - 2].first, typeDeclare))
+				{
+					ERROR_THROW_IN(122, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_BOOLLITERAL, words[i].second };
 				entry.idxTI = idTableIndex;
 				idTableIndex++;
@@ -795,6 +890,18 @@ namespace LA
 						identry.isPointer = true;
 						identry.idtype = IT::F;
 						identry.PointeridxfirstLE = foundIds[words[i].first];
+						for (int a = 0; a < ids.size(); a++)
+						{
+							if (ids[a].first == buf)
+							{
+								identry.iddatatype = ids[a].second.iddatatype;
+								if (identry.idtype == IT::F || identry.idtype == IT::V)
+								{
+									identry.idtype = ids[a].second.idtype;
+								}
+								break;
+							}
+						}
 						ids.push_back({ words[i].first, identry });
 					}
 				}
@@ -807,10 +914,22 @@ namespace LA
 					else
 					{
 						IT::Entry identry;
-						strcpy(identry.id, buf.c_str());
 						identry.idxfirstLE = i;
 						identry.isPointer = true;
 						identry.PointeridxfirstLE = foundIds[buf];
+						strcpy(identry.id, buf.c_str());
+						for (int a = 0; a < ids.size(); a++)
+						{
+							if (ids[a].first == buf)
+							{
+								identry.iddatatype = ids[a].second.iddatatype;
+								if (ids[a].second.idtype == IT::F || ids[a].second.idtype == IT::V)
+								{
+									identry.idtype = ids[a].second.idtype;
+								}
+								break;
+							}
+						}
 						ids.push_back({ buf, identry });
 					}
 				}
@@ -825,6 +944,11 @@ namespace LA
 						identry.idtype = IT::F;
 						identry.idxfirstLE = i;
 						strcpy(identry.id, words[i].first.c_str());
+						size_t length = strlen(identry.id);
+						if (length > 5)
+						{
+							ERROR_THROW_IN(121, words[i].second, i);
+						}
 						if (checkChain(words[i - 2].first, typeInteger))
 						{
 							identry.iddatatype = IT::INT;
@@ -978,7 +1102,7 @@ namespace LA
 			if (!it.table[i].isPointer || it.table[i].idtype == 4)
 			{
 				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tИдентификатор: " << it.table[i].id;
-			
+
 				if (it.table[i].idtype == 1)
 				{
 					std::cout << std::setw(6) << "\tТип: Переменная";
@@ -1088,10 +1212,11 @@ namespace LA
 			else
 			{
 				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tУказатель на: " << it.table[i].id;
-				if(it.table[i].PointeridxfirstLE != -1)
+				if (it.table[i].PointeridxfirstLE != -1)
 				{
 					std::cout << "(idxfirstLE: " << it.table[i].PointeridxfirstLE << ")";
 				}
+				std::cout << it.table[i].iddatatype << "\t" << it.table[i].idtype;
 			}
 			std::cout << "\n\n";
 		}

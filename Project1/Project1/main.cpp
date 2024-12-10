@@ -22,8 +22,8 @@ int _tmain(int argc, const _TCHAR* argv[])
 
 		LA::LexAnalize(in, lextable, idtable, optable, ids);
 		LA::printLexTable(lextable);
-		SemAnalize::SemAnalize(lextable, idtable);
 		LA::printIdTable(idtable);
+		SemAnalize::SemAnalize(lextable, idtable);
 		OT::Print(optable);
 
 		MFST_TRACE_START						//отладка

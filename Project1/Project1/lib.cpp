@@ -40,4 +40,17 @@ extern "C" {
 			return result;
 		}
 	}
+
+	void __stdcall _printInt(const int value) {
+		std::cout << value << std::endl;
+	}
+	
+	void __stdcall _printStr(const char* value) {
+		std::cout << value << std::endl;
+	}
+
+	void __stdcall _printBool(const bool value)
+	{
+		std::cout << (value ? "true" : "false") << std::endl;
+	}
 }
