@@ -79,6 +79,20 @@ namespace SemAnalize
 	);
 
 
+	FST::FST typePrintChar("", 11,
+		FST::NODE(1, FST::RELATION('_', 1)),
+		FST::NODE(1, FST::RELATION('p', 2)),
+		FST::NODE(1, FST::RELATION('r', 3)),
+		FST::NODE(1, FST::RELATION('i', 4)),
+		FST::NODE(1, FST::RELATION('n', 5)),
+		FST::NODE(1, FST::RELATION('t', 6)),
+		FST::NODE(1, FST::RELATION('C', 7)),
+		FST::NODE(1, FST::RELATION('h', 8)),
+		FST::NODE(1, FST::RELATION('a', 9)),
+		FST::NODE(1, FST::RELATION('r', 10)),
+		FST::NODE()
+	);
+
 	void SearchMain(LT::LexTable lt)
 	{
 		bool isFound = false;
@@ -199,7 +213,7 @@ namespace SemAnalize
 						paramCounter++;
 					}
 				}
-				if (paramCounter != 2)
+				if (paramCounter != 1)
 				{
 					ERROR_THROW_IN(703, sn, il);
 				}
@@ -252,7 +266,7 @@ namespace SemAnalize
 		int paramCounter = 0;
 		for (int i = 0; i < it.size; i++)
 		{
-			if ((LA::checkChain(it.table[i].id, typePrintInt) || LA::checkChain(it.table[i].id, typePrintStr) || LA::checkChain(it.table[i].id, typePrintBool)) && !LA::checkChain(it.table[i].id, typeFunction))
+			if ((LA::checkChain(it.table[i].id, typePrintInt) || LA::checkChain(it.table[i].id, typePrintStr) || LA::checkChain(it.table[i].id, typePrintBool) || LA::checkChain(it.table[i].id, typePrintChar)) && !LA::checkChain(it.table[i].id, typeFunction))
 			{
 				int iter, sn = -1, il = -1;
 				bool isOk = true;
@@ -274,11 +288,15 @@ namespace SemAnalize
 						{
 							isOk = false;
 						}
-						else if (LA::checkChain(it.table[i].id, typePrintStr) && (it.table[lt.table[iter].idxTI - 1].iddatatype != IT::STR && it.table[lt.table[iter].idxTI - 1].iddatatype != IT::CHAR))
+						else if (LA::checkChain(it.table[i].id, typePrintStr) && (it.table[lt.table[iter].idxTI - 1].iddatatype != IT::STR))
 						{
 							isOk = false;
 						}
 						else if (LA::checkChain(it.table[i].id, typePrintBool) && it.table[lt.table[iter].idxTI - 1].iddatatype != IT::BOOL)
+						{
+							isOk = false;
+						}
+						else if (LA::checkChain(it.table[i].id, typePrintChar) && it.table[lt.table[iter].idxTI - 1].iddatatype != IT::CHAR)
 						{
 							isOk = false;
 						}
@@ -324,7 +342,14 @@ namespace SemAnalize
 			}
 			else if (lt.table[i].lexema == '=')
 			{
-				type = it.table[lt.table[i - 1].idxTI].iddatatype;
+				if (lt.table[i - 3].lexema == 'd')
+				{
+					type = it.table[lt.table[i - 1].idxTI - 1].iddatatype;
+				}
+				else
+				{
+					type = it.table[lt.table[i - 1].idxTI - 1].iddatatype;
+				}
 				int k = i + 1;
 				while (lt.table[k].lexema != ';')
 				{
@@ -355,7 +380,6 @@ namespace SemAnalize
 												ERROR_THROW_IN(606, sn, il);
 											}
 										}
-										break;
 									}
 								}
 								else if (lt.table[k].lexema != ',' && lt.table[k].lexema != '(' && paramCounter != params[funId].second.size())
@@ -385,6 +409,36 @@ namespace SemAnalize
 					i = k;
 				}
 			}
+			else if (lt.table[i].lexema == 'c')
+			{
+				if (it.table[lt.table[i - 1].idxTI - 1].iddatatype != it.table[lt.table[i + 1].idxTI - 1].iddatatype)
+				{
+					ERROR_THROW_IN(607, sn, il);
+				}
+			}
+		}
+	}
+
+	void CheckReturns(LT::LexTable lt, IT::IdTable it)
+	{
+		IT::IDDATATYPE returntype;
+		for (int i = 0; i < lt.size; i++)
+		{
+			if (lt.table[i].lexema == 'f')
+			{
+				returntype = it.table[lt.table[i + 1].idxTI - 1].iddatatype;
+			}
+			if(lt.table[i].lexema == 'r')
+			{
+				if (it.table[lt.table[i + 1].idxTI - 1].iddatatype != returntype)
+				{
+					ERROR_THROW_IN(710, lt.table[i + 1].sn, i);
+				}
+			}
+			if (lt.table[i].lexema == 'm')
+			{
+				break;
+			}
 		}
 	}
 
@@ -397,5 +451,6 @@ namespace SemAnalize
 		CheckPause(lt, it);
 		CheckPrint(lt, it);
 		CheckOperations(lt, it);
+		CheckReturns(lt, it);
 	}
 }

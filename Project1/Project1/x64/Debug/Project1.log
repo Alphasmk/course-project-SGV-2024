@@ -1,2 +1,5 @@
-﻿  GRB.cpp
-  Project1.vcxproj -> E:\уник\Курсач КПО\Project1\x64\Debug\Project1.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Project1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  LexAnalize.cpp
+E:\уник\КурсачКПО\Project1\Project1\LexAnalize.cpp(584,5): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+E:\уник\КурсачКПО\Project1\Project1\LexAnalize.cpp(927,52): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Project1.vcxproj -> E:\уник\КурсачКПО\Project1\x64\Debug\SGV-2024.exe

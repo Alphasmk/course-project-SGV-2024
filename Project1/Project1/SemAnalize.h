@@ -11,4 +11,5 @@ namespace SemAnalize
 	void CheckExp(LT::LexTable, IT::IdTable);//
 	void CheckPause(LT::LexTable, IT::IdTable);//
 	void CheckPrint(LT::LexTable, IT::IdTable);//
+	void CheckReturns(LT::LexTable, IT::IdTable);
 }

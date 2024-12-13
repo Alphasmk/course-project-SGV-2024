@@ -2,26 +2,26 @@
 #include "GRB.h"
 #include "LT.h"
 using namespace std;
-#define MFST_TRACE_START cout << setfill(' ') << setw(4) << left << "Шаг:"\
+#define MFST_TRACE_START *log.stream << setfill(' ') << setw(4) << left << "Шаг:"\
 							  << setw(20) << left << " Правило" \
 							  << setw(30) << left << " Входная лента" \
 							  << setw(20) << left << " Стек" << endl;
-#define MFST_TRACE1	cout << setw(4) << left << ++FST_TRACE_n << ": "\
+#define MFST_TRACE1	*log.stream << setw(4) << left << ++FST_TRACE_n << ": "\
 					     << setw(20) << left << rule.getCRule(rbuf, nrulechain)\
 					     << setw(30) << left << getCLenta(lbuf, lenta_position)\
 					     << setw(20) << left << getCSt(sbuf) << endl;
-#define MFST_TRACE2	 cout << setw(4) << left << FST_TRACE_n << ": "\
+#define MFST_TRACE2	 *log.stream << setw(4) << left << FST_TRACE_n << ": "\
 					     << setw(20) << left << " "\
 					     << setw(30) << left << getCLenta(lbuf, lenta_position)\
 					     << setw(20) << left << getCSt(sbuf) << endl;
-#define MFST_TRACE3	cout << setw(4) << left << ++FST_TRACE_n << ": "\
+#define MFST_TRACE3	*log.stream << setw(4) << left << ++FST_TRACE_n << ": "\
 					     << setw(20) << left << " "\
 					     << setw(30) << left << getCLenta(lbuf, lenta_position)\
 					     << setw(20) << left << getCSt(sbuf) << endl;
-#define MFST_TRACE4(c)	cout << setw(4) << left << ++FST_TRACE_n << ": " << setw(20) << left << c << endl;
-#define MFST_TRACE5(c)	cout << setw(4) << left << FST_TRACE_n << ": " << setw(20) << left << c << endl;
-#define MFST_TRACE6(c, k)	cout << setw(4) << left << FST_TRACE_n << ": " << setw(20) << left << c << k << endl;
-#define MFST_TRACE7	cout << setw(4) << left << state.lenta_position<< ": "\
+#define MFST_TRACE4(c)	*log.stream << setw(4) << left << ++FST_TRACE_n << ": " << setw(20) << left << c << endl;
+#define MFST_TRACE5(c)	*log.stream << setw(4) << left << FST_TRACE_n << ": " << setw(20) << left << c << endl;
+#define MFST_TRACE6(c, k)	*log.stream << setw(4) << left << FST_TRACE_n << ": " << setw(20) << left << c << k << endl;
+#define MFST_TRACE7	*log.stream << setw(4) << left << state.lenta_position<< ": "\
 					     << setw(20) << left << rule.getCRule(rbuf, state.nrulechain) << endl;
 #define MFST_DIAGN_MAXSIZE	3*ERROR_MAXSIZE_MESSAGE
 #define MFST_DIAGN_NUMBER	3
@@ -86,19 +86,19 @@ namespace MFST
 		std::stack<MfstState> storestate;
 
 		Mfst();
-		Mfst(LT::LexTable plex, GRB::Greibach pgrebach);
+		Mfst(LT::LexTable plex, GRB::Greibach pgrebach, Log::LOG log);
 		Mfst(LT::LexTable plex, GRB::Greibach pgrebach, MFST::Rl rl);
 		MFST::Rl rl;
 		char* getCSt(char* buf);
 		char* getCLenta(char* buf, short pos, short n = 25);
-		char* getDiagnosis(short n, char* buf);
-		bool savestate();
-		bool reststate();
+		char* getDiagnosis(short n, char* buf, Log::LOG log);
+		bool savestate(Log::LOG);
+		bool reststate(Log::LOG);
 		bool push_chain(GRB::Rule::Chain chain);
-		RC_STEP step();
-		bool start();
+		RC_STEP step(Log::LOG);
+		bool start(Log::LOG log);
 		bool savediagnosis(RC_STEP pprc_step);
-		void printrules();
+		void printrules(Log::LOG);
 
 		struct Deducation
 		{

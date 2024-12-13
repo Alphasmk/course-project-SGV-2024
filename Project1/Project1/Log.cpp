@@ -102,7 +102,7 @@ void Log::WriteIn(LOG log, In::INTAB in)
 		<< "Количество строк: " << in.lines << std::endl;
 }
 
-void Log::WriteError(LOG log, Error::ERRORS error)
+void Log::WriteError(LOG log, Error::ERRORS error, Parm::PARM parm)
 {
 	if (error.id == 100)
 	{

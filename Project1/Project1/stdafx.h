@@ -13,6 +13,7 @@
 #include "PolishNotation.h"
 #include "OT.h"
 #include "SemAnalize.h"
+#include "CodeGeneration.h"
 
 #include <cstdarg>
 #include <ctime>

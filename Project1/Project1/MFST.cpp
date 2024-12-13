@@ -71,7 +71,7 @@ namespace MFST
 		lenta_size = lenta_position = 0;
 	}
 
-	Mfst::Mfst(LT::LexTable plex, GRB::Greibach pgrebach)
+	Mfst::Mfst(LT::LexTable plex, GRB::Greibach pgrebach, Log::LOG log)
 	{
 		grebach = pgrebach;
 		lexTable = plex;
@@ -98,7 +98,7 @@ namespace MFST
 		st.push(grebach.startN);
 		nrulechain = -1;
 	}
-	Mfst::RC_STEP Mfst::step()
+	Mfst::RC_STEP Mfst::step(Log::LOG log)
 	{
 		RC_STEP rc = SURPRISE;
 		if (lenta_position < lenta_size)
@@ -111,18 +111,18 @@ namespace MFST
 					GRB::Rule::Chain chain;
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain + 1)) >= 0)
 					{
-						MFST_TRACE1(rl);
-						savestate();
+						MFST_TRACE1(*log.stream);
+						savestate(log);
 						st.pop();
 						push_chain(chain);
 						rc = NS_OK;
-						MFST_TRACE2(rl);
+						MFST_TRACE2(*log.stream);
 					}
 					else
 					{
-						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE", rl)
+						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE", *log.stream)
 							savediagnosis(NS_NORULECHAIN);
-						rc = reststate() ? NS_NORULECHAIN : NS_NORULE;
+						rc = reststate(log) ? NS_NORULECHAIN : NS_NORULE;
 					}
 				}
 				else
@@ -138,14 +138,14 @@ namespace MFST
 			}
 			else
 			{
-				MFST_TRACE4("TS_NOK/NS_NORULECHAIN", rl)
-					rc = reststate() ? TS_NOK : NS_NORULECHAIN;
+				MFST_TRACE4("TS_NOK/NS_NORULECHAIN", *log.stream)
+					rc = reststate(log) ? TS_NOK : NS_NORULECHAIN;
 			}
 		}
 		else
 		{
 			rc = LENTA_END;
-			MFST_TRACE4("LENTA_END", rl)
+			MFST_TRACE4("LENTA_END", *log.stream)
 		}
 		return rc;
 	}
@@ -156,13 +156,13 @@ namespace MFST
 			st.push(chain.nt[i]);
 		return true;
 	}
-	bool Mfst::savestate()
+	bool Mfst::savestate(Log::LOG log)
 	{
 		storestate.push(MfstState(lenta_position, st, nrule, nrulechain));
-		MFST_TRACE6("SAVESTATE:", storestate.size(), rl);
+		*log.stream << setw(4) << left << FST_TRACE_n << ": " << setw(20) << left << "SAVESTATE:" << storestate.size() << endl;;
 		return true;
 	}
-	bool Mfst::reststate()
+	bool Mfst::reststate(Log::LOG log)
 	{
 		bool rc = false;
 		MfstState state;
@@ -174,8 +174,8 @@ namespace MFST
 			nrule = state.nrule;
 			nrulechain = state.nrulechain;
 			storestate.pop();
-			MFST_TRACE5("RESSTATE", rl)
-				MFST_TRACE2(rl);
+			MFST_TRACE5("RESSTATE", *log.stream)
+				MFST_TRACE2(*log.stream);
 		}
 		return rc;
 	}
@@ -193,33 +193,33 @@ namespace MFST
 		}
 		return rc;
 	}
-	bool Mfst::start()
+	bool Mfst::start(Log::LOG log)
 	{
 		bool rc = false;
 		RC_STEP rc_step = SURPRISE;
 		char buf[MFST_DIAGN_MAXSIZE];
-		rc_step = step();
+		rc_step = step(log);
 		while (rc_step == NS_OK || rc_step == NS_NORULECHAIN || rc_step == TS_OK || rc_step == TS_NOK)
-			rc_step = step();
+			rc_step = step(log);
 		switch (rc_step)
 		{
 		case NS_NORULE:
-			MFST_TRACE4("-------> NS_NORULE", rl);
-			cout << "--------------------------------------------------------------" << endl;
-			cout << getDiagnosis(0, buf) << endl;
-			cout << getDiagnosis(1, buf) << endl;
-			cout << getDiagnosis(2, buf) << endl;
+			MFST_TRACE4("-------> NS_NORULE", *log.stream);
+			*log.stream << "--------------------------------------------------------------" << endl;
+			*log.stream << getDiagnosis(0, buf, log) << endl;
+			*log.stream << getDiagnosis(1, buf, log) << endl;
+			*log.stream << getDiagnosis(2, buf, log) << endl;
 			break;
 		case NS_NORULECHAIN:
-			MFST_TRACE4("------> NS_NORULECHAIN", rl)
+			MFST_TRACE4("------> NS_NORULECHAIN", *log.stream)
 				break;
 		case NS_ERROR:
-			MFST_TRACE4("------> NS_ERROR", rl)
+			MFST_TRACE4("------> NS_ERROR", *log.stream)
 				break;
 		case LENTA_END:
-			MFST_TRACE4("-------> NS_LENTA_END", rl)
-				cout << "--------------------------------------------------------------" << endl;
-			cout << setw(4) << left << "Всего строк " << lenta_size << ", Синтаксический анализ выполнен без ошибок" << endl;
+			MFST_TRACE4("-------> NS_LENTA_END", *log.stream)
+				*log.stream << "--------------------------------------------------------------" << endl;
+			*log.stream << setw(4) << left << "Всего строк " << lenta_size << ", Синтаксический анализ выполнен без ошибок" << endl;
 			rc = true;
 			break;
 		case SURPRISE:
@@ -246,7 +246,7 @@ namespace MFST
 		buf[i - pos] = 0x00;
 		return buf;
 	}
-	char* Mfst::getDiagnosis(short n, char* buf)
+	char* Mfst::getDiagnosis(short n, char* buf, Log::LOG log)
 	{
 		char* rc = { 0 };
 		int errid = 0;
@@ -255,13 +255,13 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERRORS err = Error::geterrorin(errid, 0, 0);
-			cout << "Ошибка " << err.id << ":" << err.message << " строка " << lexTable.table[lpos].sn << endl;
+			*log.stream << "Ошибка " << err.id << ":" << err.message << " строка " << lexTable.table[lpos].sn << endl;
 			ERROR_THROW(err.id, lexTable.table[lpos].sn, lexTable.table[lpos].indxTI);
 			rc = buf;
 		}
 		return rc;
 	}
-	void Mfst::printrules()
+	void Mfst::printrules(Log::LOG log)
 	{
 		MfstState state;
 		GRB::Rule rule;
@@ -269,7 +269,7 @@ namespace MFST
 		{
 			state = storestate._Get_container()[i];
 			rule = grebach.getRule(state.nrule);
-			MFST_TRACE7(rl);
+			MFST_TRACE7(*log.stream);
 		}
 	}
 	bool Mfst::savededucation()

@@ -21,19 +21,32 @@ int _tmain(int argc, const _TCHAR* argv[])
 		IT::Entry enter;
 
 		LA::LexAnalize(in, lextable, idtable, optable, ids);
-		LA::printLexTable(lextable);
-		LA::printIdTable(idtable);
-		SemAnalize::SemAnalize(lextable, idtable);
-		OT::Print(optable);
-
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |   Лексический анализ завершен без ошибок  |~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n" << endl;
+		*log.stream << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |      Таблица лексем     | ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		LA::printLexTable(lextable, log);
+		*log.stream << "\n~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ | Таблица идентификаторов | ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		LA::printIdTable(idtable, log);
+		*log.stream << "\n~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |     Таблица операций    | ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		OT::Print(optable, log);
+		*log.stream << "\n~ ~ ~ ~ ~ ~ ~ ~ ~ ~|       Разбор цепочек      |~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
 		MFST_TRACE_START						//отладка
-			MFST::Mfst mfst(lextable, GRB::getGreibach());			//автомат
-		mfst.start();											// старт синтаксического анализа
+			MFST::Mfst mfst(lextable, GRB::getGreibach(), log);			//автомат
+		mfst.start(log);											// старт синтаксического анализа
 
 		mfst.savededucation();									//сохранить правила вывода
 
-		mfst.printrules();
+		mfst.printrules(log);
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ | Синтаксический анализ завершен без ошибок |~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n" << endl;
 
+		SemAnalize::SemAnalize(lextable, idtable);
+
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ | Семантический анализ завершен без ошибок  |~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
+		cout << "~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |-------------------------------------------|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n" << endl;
 		for (int i = 0; i < lextable.size; i++)
 		{
 			if (lextable.table[i - 1].lexema == LEX_EQUALS)
@@ -41,7 +54,8 @@ int _tmain(int argc, const _TCHAR* argv[])
 				PolishNotation::PolishNotation(i, idtable, lextable, optable);
 			}
 		}
-		LA::printLexTable(lextable);
+		CG::Generator(lextable, idtable, optable);
+
 		Log::Close(log);
 		LT::Delete(lextable);
 		IT::Delete(idtable);
@@ -49,9 +63,10 @@ int _tmain(int argc, const _TCHAR* argv[])
 	}
 	catch (Error::ERRORS e)
 	{
-		cout << "Ошибка " << e.id << ": " << e.message << endl << endl;
+		cout << "Ошибка " << e.id << ": " << e.message << endl << "Подробнее в файле ";
+		wcout << parm.log << endl << endl;
 		if (e.inext.line)
-			Log::WriteError(log, e);
+			Log::WriteError(log, e, parm);
 		if (e.id != 100)
 		{
 			Log::Close(log);

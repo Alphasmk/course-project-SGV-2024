@@ -34,5 +34,5 @@ namespace OT
 	void Add(OpTable& ot, Operator oper);
 	Operator GetOperator(OpTable& ot, int n);
 	void Delete(OpTable& ot);
-	void Print(OpTable ot);
+	void Print(OpTable ot, Log::LOG);
 }

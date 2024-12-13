@@ -5,6 +5,7 @@
 #include <utility>
 #include <unordered_set>
 #include <stack>
+#include <algorithm>
 #include <map>
 
 struct PairHash {
@@ -141,6 +142,20 @@ namespace LA
 		FST::NODE()
 	);
 
+	FST::FST typePrintChar("", 11,
+		FST::NODE(1, FST::RELATION('_', 1)),
+		FST::NODE(1, FST::RELATION('p', 2)),
+		FST::NODE(1, FST::RELATION('r', 3)),
+		FST::NODE(1, FST::RELATION('i', 4)),
+		FST::NODE(1, FST::RELATION('n', 5)),
+		FST::NODE(1, FST::RELATION('t', 6)),
+		FST::NODE(1, FST::RELATION('C', 7)),
+		FST::NODE(1, FST::RELATION('h', 8)),
+		FST::NODE(1, FST::RELATION('a', 9)),
+		FST::NODE(1, FST::RELATION('r', 10)),
+		FST::NODE()
+	);
+
 	FST::FST typeSpace("", 2,
 		FST::NODE(1, FST::RELATION(' ', 1)),
 		FST::NODE()
@@ -159,14 +174,6 @@ namespace LA
 	);
 	FST::FST typeRightThesis("", 2,
 		FST::NODE(1, FST::RELATION(')', 1)),
-		FST::NODE()
-	);
-	FST::FST typeLeftSquare("", 2,
-		FST::NODE(1, FST::RELATION('[', 1)),
-		FST::NODE()
-	);
-	FST::FST typeRightSquare("", 2,
-		FST::NODE(1, FST::RELATION(']', 1)),
 		FST::NODE()
 	);
 	FST::FST typeSemicolon("", 2,
@@ -421,6 +428,13 @@ namespace LA
 
 	);
 
+	std::string toUpper(const std::string& str) {
+		std::string upperStr = str;
+		std::transform(upperStr.begin(), upperStr.end(), upperStr.begin(),
+			[](unsigned char c) { return std::toupper(c); });
+		return upperStr;
+	}
+
 	void LexAnalize(In::INTAB& in, LT::LexTable& lt, IT::IdTable& it, OT::OpTable& ot, std::vector<std::pair<std::string, IT::Entry>>& ids)
 	{
 		std::string text = "";
@@ -434,7 +448,7 @@ namespace LA
 		std::string word = "";
 
 		int lineCounter = 1;
-
+		int ifCounter = 0;
 		bool isStrLit = false;
 
 		for (int i = 0; i < in.size; i++)
@@ -507,6 +521,70 @@ namespace LA
 		{
 			ERROR_THROW(113);
 		}
+
+		std::unordered_set<std::string> reservedWords = {
+			// Регистры
+			"AX", "BX", "CX", "DX", "AL", "AH", "BL", "BH", "CL", "CH", "DL", "DH",
+			"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP",
+			"RAX", "RBX", "RCX", "RDX", "RSI", "RDI", "RSP", "RBP",
+			"CS", "DS", "SS", "ES", "FS", "GS",
+
+			// Арифметические инструкции
+			"ADD", "ADC", "SUB", "SBB", "IMUL", "MUL", "IDIV", "DIV",
+			"NEG", "INC", "DEC",
+
+			// Логические и побитовые инструкции
+			"AND", "OR", "XOR", "NOT", "TEST", "SHL", "SHR", "SAL", "SAR",
+			"ROL", "ROR", "RCL", "RCR",
+
+			// Управление потоком
+			"JMP", "CALL", "RET", "IRET",
+			"JE", "JZ", "JNE", "JNZ", "JA", "JNBE", "JAE", "JNB", "JB", "JNAE",
+			"JBE", "JNA", "JG", "JNLE", "JGE", "JNL", "JL", "JNGE", "JLE", "JNG",
+			"JC", "JNC", "JO", "JNO", "JS", "JNS", "JP", "JPE", "JNP", "JPO",
+
+			// Работа с памятью
+			"MOV", "MOVSX", "MOVZX", "XCHG", "BSWAP", "LEA", "LDS", "LES", "LFS", "LGS", "LSS",
+
+			// Инструкции для строк
+			"MOVS", "MOVSB", "MOVSW", "MOVSD", "CMPS", "CMPSB", "CMPSW", "CMPSD",
+			"SCAS", "SCASB", "SCASW", "SCASD", "LODS", "LODSB", "LODSW", "LODSD",
+			"STOS", "STOSB", "STOSW", "STOSD", "REP", "REPE", "REPZ", "REPNE", "REPNZ",
+
+			// Управление стеком
+			"PUSH", "POP", "PUSHA", "POPA", "PUSHAD", "POPAD", "ENTER", "LEAVE",
+
+			// Работа с флагами
+			"STC", "CLC", "CMC", "STD", "CLD", "STI", "CLI", "LAHF", "SAHF", "PUSHF", "POPF",
+
+			// Команды работы с вводом-выводом
+			"IN", "OUT", "INS", "INSB", "INSW", "INSD", "OUTS", "OUTSB", "OUTSW", "OUTSD",
+
+			// Системные команды
+			"HLT", "NOP", "WAIT", "LOCK", "ESC", "BOUND", "INT", "INTO", "IRETD",
+
+			// Директивы MASM
+			"SEGMENT", "ENDS", "ASSUME", "ORG", "PROC", "ENDP", "GLOBAL", "EXTERN", "PUBLIC",
+			"MODEL", "DB", "DW", "DD", "DQ", "DT", "LABEL", "ALIGN", "EVEN", "INCLUDE", "INCLUDELIB",
+			"ENDIF", "WHILE", "ENDW", "MACRO", "ENDM",
+
+			// Расширенные инструкции (MMX, SSE, AVX)
+			"EMMS", "MOVD", "MOVQ", "PACKSSDW", "PACKUSWB", "PADD", "PSUB",
+			"XMM0", "XMM1", "XMM2", "XMM3", "XMM4", "XMM5", "XMM6", "XMM7", "XMM8", "XMM9", "XMM10",
+			"XMM11", "XMM12", "XMM13", "XMM14", "XMM15", "YMM0", "YMM1", "YMM2", "YMM3", "YMM4",
+			"YMM5", "YMM6", "YMM7", "YMM8", "YMM9", "YMM10", "YMM11", "YMM12", "YMM13", "YMM14", "YMM15"
+		};
+
+		for (size_t i = 0; i < words.size(); ++i) {
+			const std::string& word = words[i].first;
+			std::string upperWord = toUpper(word); // Преобразуем слово к верхнему регистру
+
+			if (reservedWords.find(upperWord) != reservedWords.end()) {
+				cout << "Слово: " << word << endl;
+				ERROR_THROW_IN(122, words[i].second, i);
+			}
+		}
+
 		int i = 0;
 		stack<string> functionPrefix;
 		map<string, int> foundIds;
@@ -541,6 +619,7 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeIf))
 			{
+				ifCounter++;
 				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
 				{
 					ERROR_THROW_IN(122, words[i].second, i);
@@ -550,6 +629,7 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeElse))
 			{
+				ifCounter++;
 				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
 				{
 					ERROR_THROW_IN(122, words[i].second, i);
@@ -638,7 +718,7 @@ namespace LA
 				LT::Add(lt, entry);
 				functionPrefix.push(words[i + 1].first);
 			}
-			else if (checkChain(words[i].first, typeDeclare))
+			else if (checkChain(words[i].first, typeDeclare) && words[i].first != "e")
 			{
 				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
 				{
@@ -666,7 +746,7 @@ namespace LA
 				LT::Add(lt, entry);
 				functionPrefix.push(words[i].first);
 			}
-			else if (checkChain(words[i].first, typePrintInt) || checkChain(words[i].first, typePrintStr) || checkChain(words[i].first, typePrintBool))
+			else if (checkChain(words[i].first, typePrintInt) || checkChain(words[i].first, typePrintStr) || checkChain(words[i].first, typePrintBool) || checkChain(words[i].first, typePrintChar))
 			{
 				if (i >= 2 && checkChain(words[i - 2].first, typeDeclare))
 				{
@@ -741,19 +821,13 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeRightBrace))
 			{
+				ifCounter--;
 				LT::Entry entry = { LEX_RIGHTBRACE, words[i].second };
 				LT::Add(lt, entry);
-				functionPrefix.pop();
-			}
-			else if (checkChain(words[i].first, typeLeftSquare))
-			{
-				LT::Entry entry = { LEX_LEFTSQUARE, words[i].second };
-				LT::Add(lt, entry);
-			}
-			else if (checkChain(words[i].first, typeRightSquare))
-			{
-				LT::Entry entry = { LEX_RIGHTSQUARE, words[i].second };
-				LT::Add(lt, entry);
+				if (ifCounter == 0)
+				{
+					functionPrefix.pop();
+				};
 			}
 			else if (checkChain(words[i].first, typeLeftThesis))
 			{
@@ -871,6 +945,10 @@ namespace LA
 			}
 			else if (checkChain(words[i].first, typeIdentificator))
 			{
+				if (i - 2 < 0)
+				{
+					ERROR_THROW_IN(123, words[i].second, i);
+				}
 				LT::Entry entry = { LEX_ID, words[i].second };
 				entry.idxTI = idTableIndex;
 				idTableIndex++;
@@ -923,7 +1001,7 @@ namespace LA
 							if (ids[a].first == buf)
 							{
 								identry.iddatatype = ids[a].second.iddatatype;
-								if (ids[a].second.idtype == IT::F || ids[a].second.idtype == IT::V)
+								if (ids[a].second.idtype == IT::F || ids[a].second.idtype == IT::V || ids[a].second.idtype == IT::P)
 								{
 									identry.idtype = ids[a].second.idtype;
 								}
@@ -936,6 +1014,10 @@ namespace LA
 				else
 				{
 					string foundIdsBuf = words[i].first;
+					if (words[i].first.size() > 8)
+					{
+						ERROR_THROW_IN(124, words[i].second, i);
+					}
 					if (checkChain(words[i - 1].first, typeFunction))
 					{
 						foundIds.insert({ words[i].first, i });
@@ -1038,6 +1120,11 @@ namespace LA
 		{
 			IT::Add(it, ids[i].second);
 		}
+
+		if (lt.table[lt.size - 1].lexema != ';' && lt.table[lt.size - 2].lexema != '}')
+		{
+			ERROR_THROW(5);
+		}
 	};
 
 	bool isSeparator(char symb)
@@ -1062,163 +1149,149 @@ namespace LA
 		return FST::execute(fst);
 	}
 
-	void printLexTable(LT::LexTable lt)
+	void printLexTable(LT::LexTable lt, Log::LOG log)
 	{
-		std::cout << "Таблица лексем:";
 		int line = 0;
 		for (int i = 0; i < lt.size; i++)
 		{
 			if (LT::GetEntry(lt, i).sn != line)
 			{
 				line++;
-				std::cout << "\n";
-				std::cout << std::setw(2) << std::setfill('0') << line << " ";
-				std::cout << LT::GetEntry(lt, i).lexema;
+				*log.stream << "\n";
+				*log.stream << std::setw(2) << std::setfill('0') << line << " ";
+				*log.stream << LT::GetEntry(lt, i).lexema;
 			}
 			else
 			{
-				std::cout << LT::GetEntry(lt, i).lexema;
-			}
-		}
-		for (int i = 0; i < lt.size; i++)
-		{
-			cout << "\n" << lt.table[i].lexema << "      " << lt.table[i].idxTI;
-			if (lt.table[i].idxOP != -1)
-			{
-				cout << '\t' << lt.table[i].idxOP << endl;
-			}
-			else
-			{
-				cout << endl;
+				*log.stream << LT::GetEntry(lt, i).lexema;
 			}
 		}
 	}
 
-	void printIdTable(IT::IdTable it)
+	void printIdTable(IT::IdTable it, Log::LOG log)
 	{
-		std::cout << "\n\nТаблица идентификаторов:\n";
 		for (int i = 0; i < it.size; i++)
 		{
 			if (!it.table[i].isPointer || it.table[i].idtype == 4)
 			{
-				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tИдентификатор: " << it.table[i].id;
+				*log.stream << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tИдентификатор: " << it.table[i].id;
 
 				if (it.table[i].idtype == 1)
 				{
-					std::cout << std::setw(6) << "\tТип: Переменная";
+					*log.stream << std::setw(6) << "\tТип: Переменная";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: int          " << "\tЗначение: " << it.table[i].value.vint;
+						*log.stream << std::setw(15) << "\t\tТип данных: int          " << "\tЗначение: " << it.table[i].value.vint;
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: string        ";
+						*log.stream << std::setw(15) << "\t\tТип данных: string        ";
 						if (it.table[i].value.vstr.str[0] != TT_STR_DEFAULT)
 						{
-							std::cout << "\tЗначение: " << it.table[i].value.vstr.str << std::setw(15) << "\t\tДлина строки: " << it.table[i].value.vstr.len;
+							*log.stream << "\tЗначение: " << it.table[i].value.vstr.str << std::setw(15) << "\t\tДлина строки: " << it.table[i].value.vstr.len;
 						}
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: char        ";
+						*log.stream << std::setw(15) << "\t\tТип данных: char        ";
 						if (it.table[i].value.vchar != TT_CHAR_DEFAULT)
 						{
-							std::cout << "\tЗначение: " << it.table[i].value.vchar;
+							*log.stream << "\tЗначение: " << it.table[i].value.vchar;
 						}
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(15) << "\t\tТип данных: bool        ";
-						std::cout << "\tЗначение: ";
+						*log.stream << std::setw(15) << "\t\tТип данных: bool        ";
+						*log.stream << "\tЗначение: ";
 						if (it.table[i].value.vbool)
 						{
-							std::cout << "true";
+							*log.stream << "true";
 						}
 						else
 						{
-							std::cout << "false";
+							*log.stream << "false";
 						}
 					}
 				}
 				else if (it.table[i].idtype == 2)
 				{
-					std::cout << std::setw(6) << "\tТип: Функция\t";
+					*log.stream << std::setw(6) << "\tТип: Функция\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t";
+						*log.stream << std::setw(6) << "\tТип данных: int\t";
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t";
+						*log.stream << std::setw(6) << "\tТип данных: string\t";
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t";
+						*log.stream << std::setw(6) << "\tТип данных: char\t";
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t";
+						*log.stream << std::setw(6) << "\tТип данных: bool\t";
 					}
 					else if (it.table[i].iddatatype == 5)
 					{
-						std::cout << std::setw(6) << "\tТип данных: void\t";
+						*log.stream << std::setw(6) << "\tТип данных: void\t";
 					}
 				}
 				else if (it.table[i].idtype == 3)
 				{
-					std::cout << std::setw(6) << "\tТип: Параметр\t";
+					*log.stream << std::setw(6) << "\tТип: Параметр\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t\t";
+						*log.stream << std::setw(6) << "\tТип данных: int\t\t";
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t\t";
+						*log.stream << std::setw(6) << "\tТип данных: string\t\t";
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t\t";
+						*log.stream << std::setw(6) << "\tТип данных: char\t\t";
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t\t";
+						*log.stream << std::setw(6) << "\tТип данных: bool\t\t";
 					}
 				}
 				else if (it.table[i].idtype == 4)
 				{
-					std::cout << std::setw(6) << "\tТип: Литерал\t";
+					*log.stream << std::setw(6) << "\tТип: Литерал\t";
 					if (it.table[i].iddatatype == 1)
 					{
-						std::cout << std::setw(6) << "\tТип данных: int\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vint;
+						*log.stream << std::setw(6) << "\tТип данных: int\t";
+						*log.stream << std::setw(6) << "\tЗначение: " << it.table[i].value.vint;
 					}
 					else if (it.table[i].iddatatype == 2)
 					{
-						std::cout << std::setw(6) << "\tТип данных: string\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vstr.str << "\tДлина строки: " << it.table[i].value.vstr.len;
+						*log.stream << std::setw(6) << "\tТип данных: string\t";
+						*log.stream << std::setw(6) << "\tЗначение: " << it.table[i].value.vstr.str << "\tДлина строки: " << it.table[i].value.vstr.len;
 					}
 					else if (it.table[i].iddatatype == 3)
 					{
-						std::cout << std::setw(6) << "\tТип данных: char\t";
-						std::cout << std::setw(6) << "\tЗначение: " << it.table[i].value.vchar;
+						*log.stream << std::setw(6) << "\tТип данных: char\t";
+						*log.stream << std::setw(6) << "\tЗначение: " << it.table[i].value.vchar;
 					}
 					else if (it.table[i].iddatatype == 4)
 					{
-						std::cout << std::setw(6) << "\tТип данных: bool\t";
-						std::cout << std::setw(6) << "\tЗначение: " << (it.table[i].value.vbool ? "true" : "false");
+						*log.stream << std::setw(6) << "\tТип данных: bool\t";
+						*log.stream << std::setw(6) << "\tЗначение: " << (it.table[i].value.vbool ? "true" : "false");
 					}
 				}
 			}
 			else
 			{
-				std::cout << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tУказатель на: " << it.table[i].id;
-				if (it.table[i].PointeridxfirstLE != -1)
-				{
-					std::cout << "(idxfirstLE: " << it.table[i].PointeridxfirstLE << ")";
-				}
-				std::cout << it.table[i].iddatatype << "\t" << it.table[i].idtype;
+				*log.stream << "№: " << i + 1 << "\t" << "idxfirstLE: " << it.table[i].idxfirstLE << "\tУказатель на: " << it.table[i].id;
+				//if (it.table[i].PointeridxfirstLE != -1)
+				//{
+				//	*log.stream << "(idxfirstLE: " << it.table[i].PointeridxfirstLE << ")";
+				//}
+				//*log.stream << it.table[i].iddatatype << "\t" << it.table[i].idtype;
 			}
-			std::cout << "\n\n";
+			*log.stream << "\n\n";
 		}
 	}
 }

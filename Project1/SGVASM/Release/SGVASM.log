@@ -1,0 +1,10 @@
+﻿  Assembling asm.asm...
+asm.asm(45): error A2008: syntax error : ,
+asm.asm(78): error A2008: syntax error : ENDP
+asm.asm(189): error A2008: syntax error : fst
+asm.asm(62): error A2006: undefined symbol : fstz
+asm.asm(63): error A2006: undefined symbol : fstx
+asm.asm(64): error A2006: undefined symbol : fstz
+asm.asm(72): error A2006: undefined symbol : fstz
+asm.asm(73): error A2006: undefined symbol : fstz
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: выход из команды "ml.exe /c /nologo /Zi /Fo"Release\asm.obj" /W3 /errorReport:prompt  /Taasm.asm" с кодом "1".

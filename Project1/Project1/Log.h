@@ -18,6 +18,6 @@ namespace Log
 	void WriteLog(LOG log);
 	void WriteParm(LOG log, Parm::PARM parm);
 	void WriteIn(LOG log, In::INTAB in);
-	void WriteError(LOG log, Error::ERRORS error);
+	void WriteError(LOG log, Error::ERRORS error, Parm::PARM parm);
 	void Close(LOG log);
 }

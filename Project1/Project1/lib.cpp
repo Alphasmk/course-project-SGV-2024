@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include <corecrt_math.h>
+﻿#include <corecrt_math.h>
 #include <cstdlib>
 #include <iostream>
 #include <string.h>

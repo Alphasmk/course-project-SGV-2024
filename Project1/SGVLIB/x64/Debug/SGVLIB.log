@@ -1,0 +1,4 @@
+﻿  SGVLIB.cpp
+E:\уник\КурсачКПО\Project1\SGVLIB\SGVLIB.cpp(8,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+E:\уник\КурсачКПО\Project1\SGVLIB\SGVLIB.cpp(28,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  SGVLIB.vcxproj -> E:\уник\КурсачКПО\Project1\x64\Debug\SGVLIB.lib

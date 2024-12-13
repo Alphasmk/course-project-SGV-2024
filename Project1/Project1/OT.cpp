@@ -29,42 +29,43 @@ namespace OT
         ot.size = 0;
     }
 
-    void Print(OpTable ot)
+    void Print(OpTable ot, Log::LOG log)
     {
+        
         for (int i = 0; i < ot.size; i++)
         {
-            cout << "Лексема: ";
+            *log.stream << "Лексема: ";
             switch (ot.table[i].operatorType)
             {
             case OT::A:
-                cout << "+" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "+" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::D:
-                cout << "/" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "/" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::M:
-                cout << "*" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "*" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::S:
-                cout << "-" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "-" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::IE:
-                cout << "==" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "==" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::INE:
-                cout << "!=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "!=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::G:
-                cout << ">" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << ">" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::L:
-                cout << "<" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "<" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::GE:
-                cout << ">=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << ">=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             case OT::LE:
-                cout << "<=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
+                *log.stream << "<=" << "\tИндекс в таблице лексем: " << ot.table[i].idxLE << endl;
                 break;
             }
         }
